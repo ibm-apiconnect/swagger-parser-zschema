@@ -19,10 +19,15 @@
     "reference",
     "dereference"
   ],
-  "author": {
-    "name": "James Messinger",
-    "url": "https://jamesmessinger.com"
-  },
+  "contributors": [
+    {
+      "name": "James Messinger"
+    },
+    {
+      "name": "JonLuca DeCaro",
+      "email": "apis@jonlu.ca"
+    }
+  ],
   "homepage": "https://apidevtools.com/swagger-parser/",
   "repository": {
     "type": "git",
