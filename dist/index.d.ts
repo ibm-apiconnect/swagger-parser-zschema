@@ -1,2 +1,2 @@
-import * as SwaggerParser from "@apidevtools/swagger-parser";
+import * as SwaggerParser from "@ibm-apiconnect/swagger-parser-zschema";
 export = SwaggerParser;

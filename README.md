@@ -1,3 +1,23 @@
+# 🛠️ About This Fork
+This is a fork of @apidevtools/swagger-parser created to improve Content Security Policy (CSP) compliance for secure web environments.
+
+# 🚨 Why Fork?
+The original package uses the following JSON Schema validators:
+
+ajv
+
+ajv-draft-04
+
+Both rely on dynamic code generation (new Function()), which is blocked under CSP unless unsafe-eval is allowed. This presents security concerns for browser-based applications that enforce strict CSP rules.
+
+# ✅ What Was Changed
+🔁 Replaced ajv and ajv-draft-04 with z-schema, a JSON Schema validator that does not use eval or new Function(), making it CSP-safe.
+
+🧪 Updated the internal validation logic to work with Z-Schema.
+
+🔒 Ensures OpenAPI (Swagger 2.0 / OAS 3.0 / 3.1) schema validation can run in environments with strict CSP (e.g., browsers without unsafe-eval).
+
+
 # Swagger 2.0 and OpenAPI 3.0 parser/validator
 
 [![Build Status](https://github.com/APIDevTools/swagger-parser/workflows/CI-CD/badge.svg?branch=master)](https://github.com/APIDevTools/swagger-parser/actions)
@@ -23,10 +43,7 @@
 - Supports [circular references](https://apidevtools.com/swagger-parser/docs/#circular-refs), nested references, back-references, and cross-references
 - Maintains object reference equality &mdash; `$ref` pointers to the same value always resolve to the same object instance
 
-## Related Projects
 
-- [Swagger CLI](https://github.com/APIDevTools/swagger-cli)
-- [Swagger Express Middleware](https://github.com/APIDevTools/swagger-express-middleware)
 
 ## Example
 
@@ -58,7 +75,7 @@ For more detailed examples, please see the [API Documentation](https://apidevtoo
 Install using [npm](https://docs.npmjs.com/about-npm/):
 
 ```bash
-npm install @apidevtools/swagger-parser
+npm install @ibm-apiconnect/swagger-parser-zschema
 ```
 
 ## Usage
@@ -66,13 +83,13 @@ npm install @apidevtools/swagger-parser
 When using Swagger Parser in Node.js apps, you'll probably want to use **CommonJS** syntax:
 
 ```javascript
-const SwaggerParser = require("@apidevtools/swagger-parser");
+const SwaggerParser = require("@ibm-apiconnect/swagger-parser-zschema");
 ```
 
 When using a transpiler such as [Babel](https://babeljs.io/) or [TypeScript](https://www.typescriptlang.org/), or a bundler such as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/), you can use **ECMAScript modules** syntax instead:
 
 ```javascript
-import * as SwaggerParser from "@apidevtools/swagger-parser";
+import * as SwaggerParser from "@ibm-apiconnect/swagger-parser-zschema";
 ```
 
 ## Browser support
@@ -89,23 +106,6 @@ Full API documentation is available [right here](https://apidevtools.com/swagger
 
 The library, by default, attempts to resolve any files referenced using `$ref`, without considering file extensions or the location of the files. This can result in Local File Inclusion (LFI), thus, potentially sensitive information disclosure. Developers must be cautious when working with documents from untrusted sources. See [here](SECURITY.md) for more details and information on how to mitigate LFI.
 
-## Contributing
-
-I welcome any contributions, enhancements, and bug-fixes. [Open an issue](https://github.com/APIDevTools/swagger-parser/issues) on GitHub and [submit a pull request](https://github.com/APIDevTools/swagger-parser/pulls).
-
-To test the project locally on your computer:
-
-1. **Clone this repo**<br>
-   `git clone https://github.com/APIDevTools/swagger-parser.git`
-
-2. **Install dependencies**<br>
-   `npm install`
-
-3. **Run the tests**<br>
-   `npm test`
-
-4. **Check the code coverage**<br>
-   `npm run coverage`
 
 ## License
 

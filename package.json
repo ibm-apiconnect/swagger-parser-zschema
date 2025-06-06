@@ -1,7 +1,7 @@
 {
-  "name": "@apidevtools/swagger-parser",
-  "version": "11.0.0",
-  "description": "Swagger 2.0 and OpenAPI 3.0 parser and validator for Node and browsers",
+  "name": "@ibm-apiconnect/swagger-parser-zschema",
+  "version": "11.0.0-zschema.0",
+  "description": "Swagger 2.0 and OpenAPI 3.0/3.1 parser and validator for Node and browsers",
   "keywords": [
     "swagger",
     "openapi",
@@ -31,7 +31,7 @@
   "homepage": "https://apidevtools.com/swagger-parser/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/APIDevTools/swagger-parser.git"
+    "url": "https://github.com/ibm-apiconnect/swagger-parser-zschema"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -77,8 +77,7 @@
     "@apidevtools/json-schema-ref-parser": "13.0.1",
     "@apidevtools/openapi-schemas": "^2.1.0",
     "@apidevtools/swagger-methods": "^3.0.2",
-    "ajv": "^8.17.1",
-    "ajv-draft-04": "^1.0.0",
+    "z-schema": "^6.0.2",
     "call-me-maybe": "^1.0.2"
   },
   "peerDependencies": {

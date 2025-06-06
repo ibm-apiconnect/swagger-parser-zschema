@@ -1,2 +1,2 @@
 "use strict";
-module.exports = require("@apidevtools/swagger-parser");
+module.exports = require("@ibm-apiconnect/swagger-parser-zschema");

@@ -1,5 +1,5 @@
 {
-  "name": "swagger-parser",
+  "name": "swagger-parser-zschema",
   "version": "X.X.X",
   "description": "Swagger 2.0 and OpenAPI 3.0 parser and validator for Node and browsers",
   "keywords": [
@@ -23,10 +23,10 @@
     "name": "James Messinger",
     "url": "https://jamesmessinger.com"
   },
-  "homepage": "https://apitools.dev/swagger-parser/",
+ 
   "repository": {
     "type": "git",
-    "url": "https://github.com/APIDevTools/swagger-parser.git"
+    "url": "https://github.com/ibm-apiconnect/swagger-parser-zschema"
   },
   "license": "MIT",
   "main": "index.js",
@@ -39,6 +39,6 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@apidevtools/swagger-parser": "X.X.X"
+    "@ibm-apiconnect/swagger-parser-zschema": "X.X.X"
   }
 }
