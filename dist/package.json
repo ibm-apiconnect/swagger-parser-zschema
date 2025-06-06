@@ -39,6 +39,6 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@ibm-apiconnect/swagger-parser-zschema": "X.X.X"
+    "swagger-parser-zschema": "X.X.X"
   }
 }

@@ -75,7 +75,7 @@ For more detailed examples, please see the [API Documentation](https://apidevtoo
 Install using [npm](https://docs.npmjs.com/about-npm/):
 
 ```bash
-npm install @ibm-apiconnect/swagger-parser-zschema
+npm install swagger-parser-zschema
 ```
 
 ## Usage
@@ -83,13 +83,13 @@ npm install @ibm-apiconnect/swagger-parser-zschema
 When using Swagger Parser in Node.js apps, you'll probably want to use **CommonJS** syntax:
 
 ```javascript
-const SwaggerParser = require("@ibm-apiconnect/swagger-parser-zschema");
+const SwaggerParser = require("swagger-parser-zschema");
 ```
 
 When using a transpiler such as [Babel](https://babeljs.io/) or [TypeScript](https://www.typescriptlang.org/), or a bundler such as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/), you can use **ECMAScript modules** syntax instead:
 
 ```javascript
-import * as SwaggerParser from "@ibm-apiconnect/swagger-parser-zschema";
+import * as SwaggerParser from "swagger-parser-zschema";
 ```
 
 ## Browser support
