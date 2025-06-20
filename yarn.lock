@@ -39,43 +39,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apidevtools/swagger-parser@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@apidevtools/swagger-parser@workspace:."
-  dependencies:
-    "@apidevtools/json-schema-ref-parser": "npm:14.0.1"
-    "@apidevtools/openapi-schemas": "npm:^2.1.0"
-    "@apidevtools/swagger-methods": "npm:^3.0.2"
-    "@eslint/compat": "npm:^1.3.0"
-    "@eslint/js": "npm:^9.29.0"
-    "@jsdevtools/host-environment": "npm:^2.1.2"
-    "@types/node": "npm:^24.0.3"
-    ajv: "npm:^8.17.1"
-    ajv-draft-04: "npm:^1.0.0"
-    call-me-maybe: "npm:^1.0.2"
-    chai: "npm:^5"
-    cross-env: "npm:^7.0.3"
-    esbuild: "npm:^0.25.5"
-    esbuild-plugin-polyfill-node: "npm:^0.3.0"
-    eslint: "npm:^9.29.0"
-    eslint-config-prettier: "npm:^10.1.5"
-    eslint-plugin-jsdoc: "npm:^51.0.1"
-    eslint-plugin-prettier: "npm:^5.4.1"
-    eslint-plugin-unused-imports: "npm:^4.1.4"
-    globals: "npm:^16.2.0"
-    js-yaml: "npm:^4.1.0"
-    mocha: "npm:^11.6.0"
-    nyc: "npm:^17.1.0"
-    openapi-types: "npm:^12.1.3"
-    prettier: "npm:^3.5.3"
-    rimraf: "npm:^6.0.1"
-    typescript: "npm:^5.8.3"
-    typescript-eslint: "npm:^8.34.1"
-  peerDependencies:
-    openapi-types: ">=7"
-  languageName: unknown
-  linkType: soft
-
 "@babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -978,10 +941,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"are-docs-informative@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "are-docs-informative@npm:0.1.1"
-  checksum: 10c0/03f4ad46f872e8f25fd7d8f3826a926fa13c060372c48797d0fb5ed755dd13111a654eb7f080479aa60e7bef16f0d59ff3c8839de5f28735386086fd4a8b3cf5
+"are-docs-informative@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "are-docs-informative@npm:0.0.2"
+  checksum: 10c0/f0326981bd699c372d268b526b170a28f2e1aec2cf99d7de0686083528427ecdf6ae41fef5d9988e224a5616298af747ad8a76e7306b0a7c97cc085a99636d60
   languageName: node
   linkType: hard
 
@@ -1105,9 +1068,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001718":
-  version: 1.0.30001723
-  resolution: "caniuse-lite@npm:1.0.30001723"
-  checksum: 10c0/e019503061759b96017c4d27ddd7ca1b48533eabcd0431b51d2e3156f99f6b031075e46c279c0db63424cdfc874bba992caec2db51b922a0f945e686246886f6
+  version: 1.0.30001724
+  resolution: "caniuse-lite@npm:1.0.30001724"
+  checksum: 10c0/ed9ec0bcf619f0e7ef2d33aac74d2346d1faf52060dfded1fb9c32d87854de5c2988b3ba338c281034c88bf797d6b55468a804ce8396a7e16a48cb0d481d4bfe
   languageName: node
   linkType: hard
 
@@ -1324,9 +1287,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.160":
-  version: 1.5.168
-  resolution: "electron-to-chromium@npm:1.5.168"
-  checksum: 10c0/4e3ca616717c22b270e04742ae77aeb7a5f7f56b40e856c1d97fcab8fb12b6ae4c406fe3d6fa28213bbe95d271f9a5e79585f33fb3930b6a0b1f076ba113d6ca
+  version: 1.5.171
+  resolution: "electron-to-chromium@npm:1.5.171"
+  checksum: 10c0/e9d7e70d5fe829951c955287877155889a752336e48c715e373c6919f8e438bb686b7278511013aa8456c329c55895059a1d9e4b799217483f28dbae60c198d8
   languageName: node
   linkType: hard
 
@@ -1474,12 +1437,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:^50.7.1":
-  version: 50.7.1
-  resolution: "eslint-plugin-jsdoc@npm:50.7.1"
+"eslint-plugin-jsdoc@npm:^51.0.1":
+  version: 51.0.3
+  resolution: "eslint-plugin-jsdoc@npm:51.0.3"
   dependencies:
     "@es-joy/jsdoccomment": "npm:~0.50.2"
-    are-docs-informative: "npm:^0.1.1"
+    are-docs-informative: "npm:^0.0.2"
     comment-parser: "npm:1.4.1"
     debug: "npm:^4.4.1"
     escape-string-regexp: "npm:^4.0.0"
@@ -1490,7 +1453,7 @@ __metadata:
     spdx-expression-parse: "npm:^4.0.0"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
-  checksum: 10c0/8ec6295ce789534c1ff47f2988e56c05dc5afb6c1ae54d7036196522aa32de0dee47affe1526697f4ad63ca41124f45175e175ac1f0efe60592f15d1501b57bb
+  checksum: 10c0/1303689abeda7b01d1bb735fed1dd976882e6c00e4f0988686e989f1e20b7244dad31e0e0f6ccbbc0fc19ee25d1865ed13fff0599129292e4d9ff880750aad21
   languageName: node
   linkType: hard
 
@@ -2447,9 +2410,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^11.5.0":
-  version: 11.5.0
-  resolution: "mocha@npm:11.5.0"
+"mocha@npm:^11.6.0":
+  version: 11.7.0
+  resolution: "mocha@npm:11.7.0"
   dependencies:
     browser-stdout: "npm:^1.3.1"
     chokidar: "npm:^4.0.1"
@@ -2474,7 +2437,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: 10c0/c8ffb6328e2073a344ef9c4a340a4babf267d02464283b12c1a7ffc8e2ee8db0816162b937a9fd1b1d3db7e5d2aaa04a44baf37672f8db566e919cd21d77f7b1
+  checksum: 10c0/1eb97ccc6b76804c184688871fcce52bacb38489f0ae885a9105df74f2367d6105a26b8a8e9efad55f38c10275551a3b53690ade8e3c1a586b6e746c10057c27
   languageName: node
   linkType: hard
 
@@ -3076,6 +3039,42 @@ __metadata:
   checksum: 10c0/ea1d3c275dd604c974670f63943ed9bd83623edc102430c05adb8efc56ba492746b6e95386e7831b872ec3807fd89dd8eb43f735195f37b5ec343e4234cc7e89
   languageName: node
   linkType: hard
+
+"swagger-parser-zschema@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "swagger-parser-zschema@workspace:."
+  dependencies:
+    "@apidevtools/json-schema-ref-parser": "npm:14.0.1"
+    "@apidevtools/openapi-schemas": "npm:^2.1.0"
+    "@apidevtools/swagger-methods": "npm:^3.0.2"
+    "@eslint/compat": "npm:^1.3.0"
+    "@eslint/js": "npm:^9.29.0"
+    "@jsdevtools/host-environment": "npm:^2.1.2"
+    "@types/node": "npm:^24.0.3"
+    call-me-maybe: "npm:^1.0.2"
+    chai: "npm:^5"
+    cross-env: "npm:^7.0.3"
+    esbuild: "npm:^0.25.5"
+    esbuild-plugin-polyfill-node: "npm:^0.3.0"
+    eslint: "npm:^9.29.0"
+    eslint-config-prettier: "npm:^10.1.5"
+    eslint-plugin-jsdoc: "npm:^51.0.1"
+    eslint-plugin-prettier: "npm:^5.4.1"
+    eslint-plugin-unused-imports: "npm:^4.1.4"
+    globals: "npm:^16.2.0"
+    js-yaml: "npm:^4.1.0"
+    mocha: "npm:^11.6.0"
+    nyc: "npm:^17.1.0"
+    openapi-types: "npm:^12.1.3"
+    prettier: "npm:^3.5.3"
+    rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.8.3"
+    typescript-eslint: "npm:^8.34.1"
+    z-schema: "npm:^6.0.2"
+  peerDependencies:
+    openapi-types: ">=7"
+  languageName: unknown
+  linkType: soft
 
 "synckit@npm:^0.11.7":
   version: 0.11.8
