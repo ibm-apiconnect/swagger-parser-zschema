@@ -1,6 +1,6 @@
 {
   "name": "swagger-parser-zschema",
-  "version": "11.0.0-zschema.1",
+  "version": "12.0.0-zschema.0",
   "description": "Swagger 2.0 and OpenAPI 3.0/3.1 parser and validator for Node and browsers",
   "keywords": [
     "swagger",
