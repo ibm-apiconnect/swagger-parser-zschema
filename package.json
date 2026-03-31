@@ -78,7 +78,7 @@
     "@apidevtools/openapi-schemas": "^2.1.0",
     "@apidevtools/swagger-methods": "^3.0.2",
     "call-me-maybe": "^1.0.2",
-    "z-schema": "^6.0.2"
+    "z-schema": "^12.1.0"
   },
   "peerDependencies": {
     "openapi-types": ">=7"
