@@ -1,0 +1,86 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "health-check-one-v1",
+    "x-ibm-name": "health-check-one-v1",
+    "version": "1.0.0"
+  },
+  "schemes": ["https"],
+  "basePath": "/health",
+  "security": [
+    {
+      "clientID": [],
+      "clientSecret": []
+    }
+  ],
+  "securityDefinitions": {
+    "clientID": {
+      "type": "apiKey",
+      "description": "Client ID obtained when creating the App",
+      "name": "X-IBM-Client-Id",
+      "in": "header",
+      "x-key-type": "client_id"
+    },
+    "clientSecret": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "hide-this",
+      "x-key-type": "client_secret"
+    }
+  },
+  "x-ibm-configuration": {
+    "cors": {
+      "enabled": true
+    },
+    "gateway": "datapower-api-gateway",
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "assembly": {
+      "execute": [
+        {
+          "gatewayscript": {
+            "version": "2.0.0",
+            "title": "gatewayscript",
+            "source": "//    APIC v2018\nvar apim = require('apim');\n\n//get catalog name\nvar cat = apim.getvariable('api.catalog.name');\n\n//set status code\ncontext.message.statusCode = '200 Healthy';\nvar code = context.message.statusCode;\nvar reason = context.message.reasonPhrase;\n\nsession.output.write('{\"statusCode\"; '+code+\" \"+reason+'},{\"catalog\": '+cat+'}');\n"
+          }
+        }
+      ]
+    },
+    "properties": {
+      "target-url": {
+        "value": "http://example.com/operation-name",
+        "description": "The URL of the target service",
+        "encoded": false
+      }
+    },
+    "activity-log": {
+      "enabled": true,
+      "error-content": "header",
+      "success-content": "activity"
+    },
+    "application-authentication": {
+      "certificate": false
+    },
+    "catalogs": {}
+  },
+  "tags": [],
+  "paths": {
+    "/test": {
+      "get": {
+        "tags": [""],
+        "responses": {
+          "200": {
+            "description": "Test path OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "consumes": []
+      }
+    },
+    "/verify": {}
+  }
+}

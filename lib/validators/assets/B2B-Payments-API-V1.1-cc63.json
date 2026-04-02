@@ -1,0 +1,2957 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1.1-cc63",
+    "title": "B2B-Payments-API",
+    "x-ibm-name": "b2b-payments-api",
+    "x-postman-workspace-id":	"6c274c36-ad8e-4229-8cb1-c70ad828949d",
+    "x-postman-collection-id":	"46477006-0b5adbac-75e8-44c3-a528-d2fa23eafc4c"
+  },
+  "basePath": "/psd2",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/payments/groupPayments": {
+      "post": {
+        "summary": "Create Group Payments",
+        "operationId": "createGroupPayments",
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "description": "Unique ID for TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Encrypted access token ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "Correlation ID passed by the requesting system",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "journeyId",
+            "in": "header",
+            "description": "Global transaction Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "header",
+            "description": "2-character iso code for preferred language.  If empty the default will be English",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originSourceId",
+            "in": "header",
+            "description": "ID of the source system invoking",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originChannelId",
+            "in": "header",
+            "description": "ID of the channel from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originDeptId",
+            "in": "header",
+            "description": "ID of the department from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originUserId",
+            "in": "header",
+            "description": "User ID of the requester (as per LDAP)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originEmployeeId",
+            "in": "header",
+            "description": "Employee ID of the requester (as per employee HR record)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originTerminalId",
+            "in": "header",
+            "description": "Terminal ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "header",
+            "description": "Subscription Id of TPP",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "header",
+            "description": "The time stamp when the request was sent to system",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tppId",
+            "in": "header",
+            "description": "Third party Provide ( TPP ) ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerIP",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP"
+          },
+          {
+            "name": "customerSessionId",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Session Identifier with the TPP"
+          },
+          {
+            "name": "customerDevice",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Web Browser Agent or Device Type (Whatever is available from Platform, OS Version, Model) if this is a Mobile App"
+          },
+          {
+            "name": "loginTimeStamp",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The time of PSU’s last login with the TPP related to the Session Id provided above"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateGroupPaymentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateGroupPaymentResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CreateGroupPaymentResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          },
+          "302": {
+            "description": "Found",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "404": {
+            "description": "API URL Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many Requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "schema": {
+              "$ref": "#/definitions/GetGroupPaymentResponse"
+            }
+          }
+        },
+        "tags": [
+          "psd-2-payments-web-services"
+        ],
+        "operationId": "getGroupPaymentsStatus",
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "Third party Provide ( TPP ) Application Id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "description": "Unique ID for TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Encrypted access token ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "Correlation ID passed by the requesting system",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "journeyId",
+            "in": "header",
+            "description": "Global transaction Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "header",
+            "description": "2-character iso code for preferred language.  If empty the default will be English",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originSourceId",
+            "in": "header",
+            "description": "ID of the source system invoking",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originChannelId",
+            "in": "header",
+            "description": "ID of the channel from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originDeptId",
+            "in": "header",
+            "description": "ID of the department from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originUserId",
+            "in": "header",
+            "description": "User ID of the requester (as per LDAP)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originEmployeeId",
+            "in": "header",
+            "description": "Employee ID of the requester (as per employee HR record)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originTerminalId",
+            "in": "header",
+            "description": "Terminal ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "header",
+            "description": "subscriptionId of TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "header",
+            "description": "The time stamp when the request was sent to system",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tppId",
+            "in": "header",
+            "description": "Third party Provide ( TPP ) ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerIP",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP"
+          },
+          {
+            "name": "customerSessionId",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Session Identifier with the TPP"
+          },
+          {
+            "name": "customerDevice",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Web Browser Agent or Device Type (Whatever is available from Platform, OS Version, Model) if this is a Mobile App"
+          },
+          {
+            "name": "loginTimeStamp",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The time of PSU’s last login with the TPP related to the Session Id provided above"
+          }
+        ]
+      }
+    },
+    "/v1/massPayments": {
+      "get": {
+        "summary": "Get Mass Payment Status",
+        "operationId": "getMassPaymentStatus",
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "Third party Provide ( TPP ) Application Id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "description": "Unique ID for TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filename",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endToEndId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "transactionDate",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "qualityOfCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Encrypted access token ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "Correlation ID passed by the requesting system",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "journeyId",
+            "in": "header",
+            "description": "Global transaction Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "header",
+            "description": "2-character iso code for preferred language.  If empty the default will be English",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originSourceId",
+            "in": "header",
+            "description": "ID of the source system invoking",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originChannelId",
+            "in": "header",
+            "description": "ID of the channel from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originDeptId",
+            "in": "header",
+            "description": "ID of the department from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originUserId",
+            "in": "header",
+            "description": "User ID of the requester (as per LDAP)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originEmployeeId",
+            "in": "header",
+            "description": "Employee ID of the requester (as per employee HR record)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originTerminalId",
+            "in": "header",
+            "description": "Terminal ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "header",
+            "description": "subscriptionId of TPP",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "header",
+            "description": "The time stamp when the request was sent to system",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tppId",
+            "in": "header",
+            "description": "Third party Provide ( TPP ) ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerIP",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP"
+          },
+          {
+            "name": "customerSessionId",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Session Identifier with the TPP"
+          },
+          {
+            "name": "customerDevice",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Web Browser Agent or Device Type (Whatever is available from Platform, OS Version, Model) if this is a Mobile App"
+          },
+          {
+            "name": "loginTimeStamp",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The time of PSU’s last login with the TPP related to the Session Id provided above"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getMassPaymentStatusResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "302": {
+            "description": "Found",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "404": {
+            "description": "API URL Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many Requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create mass payments",
+        "operationId": "createMassPayments",
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "Third party Provide ( TPP ) Application Id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Encrypted access token ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "Correlation ID passed by the requesting system",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "journeyId",
+            "in": "header",
+            "description": "Global transaction Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "header",
+            "description": "2-character iso code for preferred language.  If empty the default will be English",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originSourceId",
+            "in": "header",
+            "description": "ID of the source system invoking",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originChannelId",
+            "in": "header",
+            "description": "ID of the channel from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originDeptId",
+            "in": "header",
+            "description": "ID of the department from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originUserId",
+            "in": "header",
+            "description": "User ID of the requester (as per LDAP)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originEmployeeId",
+            "in": "header",
+            "description": "Employee ID of the requester (as per employee HR record)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originTerminalId",
+            "in": "header",
+            "description": "Terminal ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "header",
+            "description": "Subscription Id of User",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "header",
+            "description": "The time stamp when the request was sent to system",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tppId",
+            "in": "header",
+            "description": "Third party Provide ( TPP ) ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerIP",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP"
+          },
+          {
+            "name": "customerSessionId",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Session Identifier with the TPP"
+          },
+          {
+            "name": "customerDevice",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Web Browser Agent or Device Type (Whatever is available from Platform, OS Version, Model) if this is a Mobile App"
+          },
+          {
+            "name": "loginTimeStamp",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The time of PSU’s last login with the TPP related to the Session Id provided above"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateMassPaymentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          },
+          "302": {
+            "description": "Found",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "404": {
+            "description": "API URL Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many Requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/utilityBillCompanies": {
+      "get": {
+        "summary": "",
+        "description": "Retrieve Utility Bill Companies",
+        "operationId": "getUtilityCompanies",
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "description": "Unique ID for TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Encrypted access token ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "Correlation ID passed by the requesting system",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "journeyId",
+            "in": "header",
+            "description": "Global transaction Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "header",
+            "description": "2-character iso code for preferred language.  If empty the default will be English",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originSourceId",
+            "in": "header",
+            "description": "ID of the source system invoking",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originChannelId",
+            "in": "header",
+            "description": "ID of the channel from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originDeptId",
+            "in": "header",
+            "description": "ID of the department from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originUserId",
+            "in": "header",
+            "description": "User ID of the requester (as per LDAP)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originEmployeeId",
+            "in": "header",
+            "description": "Employee ID of the requester (as per employee HR record)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originTerminalId",
+            "in": "header",
+            "description": "Terminal ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "header",
+            "description": "Subscription Id of TPP",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "header",
+            "description": "The time stamp when the request was sent to system",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tppId",
+            "in": "header",
+            "description": "Third party Provide ( TPP ) ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerIP",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP"
+          },
+          {
+            "name": "customerSessionId",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Session Identifier with the TPP"
+          },
+          {
+            "name": "customerDevice",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Web Browser Agent or Device Type (Whatever is available from Platform, OS Version, Model) if this is a Mobile App"
+          },
+          {
+            "name": "loginTimeStamp",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The time of PSU’s last login with the TPP related to the Session Id provided above"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveCompaniesResponse"
+            }
+          },
+          "302": {
+            "description": "Found",
+            "schema": {
+              "$ref": "#/definitions/RetrieveCompaniesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "API URL Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "405": {
+            "description": "Method not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "429": {
+            "description": "Too many Requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/groupAndMassPayments/healthCheck": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK"
+          }
+        },
+        "tags": [
+          "healthCheck"
+        ],
+        "operationId": "healthCheck",
+        "produces": [],
+        "consumes": []
+      }
+    },
+    "/v1/b2bPayments/{paymentId}": {
+      "delete": {
+        "description": "Cancel a payment which is authorized",
+        "operationId": "cancelPayment",
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Encrypted access token ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "Correlation ID passed by the requesting system",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "requestId",
+            "in": "header",
+            "description": "Request IDs when journey has multiple services",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "journeyId",
+            "in": "header",
+            "description": "Global transaction Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "header",
+            "description": "2-character iso code for preferred language.  If empty the default will be English",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originSourceId",
+            "in": "header",
+            "description": "ID of the source system invoking",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originChannelId",
+            "in": "header",
+            "description": "ID of the channel from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originDeptId",
+            "in": "header",
+            "description": "ID of the department from which the invocation occurred",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originUserId",
+            "in": "header",
+            "description": "User ID of the requester (as per LDAP)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originEmployeeId",
+            "in": "header",
+            "description": "Employee ID of the requester (as per employee HR record)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originTerminalId",
+            "in": "header",
+            "description": "Terminal ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sessionId",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workstationId",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "paymentId",
+            "in": "path",
+            "description": "Payment Id",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "minLength": 36
+          },
+          {
+            "name": "subscriptionId",
+            "in": "header",
+            "description": "Subscription Id of TPP",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "header",
+            "description": "User ID of the requester",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "consumerId",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeStamp",
+            "in": "header",
+            "description": "The time stamp when the request was sent to system",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tppId",
+            "in": "header",
+            "description": "Third party Provide ( TPP ) ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customerIP",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP"
+          },
+          {
+            "name": "customerSessionId",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Session Identifier with the TPP"
+          },
+          {
+            "name": "customerDevice",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The PSU’s Web Browser Agent or Device Type (Whatever is available from Platform, OS Version, Model) if this is a Mobile App"
+          },
+          {
+            "name": "loginTimeStamp",
+            "type": "string",
+            "required": false,
+            "in": "header",
+            "description": "The time of PSU’s last login with the TPP related to the Session Id provided above"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "404": {
+            "description": "API URL Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "405": {
+            "description": "Method not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "429": {
+            "description": "Too many Requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "journeyId": {
+                "type": "string",
+                "description": "Global Transaction id/Journey ID"
+              },
+              "timeStamp": {
+                "type": "string",
+                "description": "The time stamp when the message was received from the system"
+              },
+              "correlationId": {
+                "type": "string",
+                "description": "Correlation ID passed by the requesting system"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalDetails": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "example": "404"
+        },
+        "severity": {
+          "type": "string",
+          "example": "High"
+        },
+        "status": {
+          "type": "string",
+          "example": "Failure"
+        },
+        "description": {
+          "type": "string",
+          "example": "more information"
+        }
+      }
+    },
+    "Description": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "line3": {
+          "type": "string"
+        },
+        "line4": {
+          "type": "string"
+        }
+      }
+    },
+    "RetrieveCompaniesResponse": {
+      "type": "object",
+      "required": [
+        "utilityCompanies"
+      ],
+      "properties": {
+        "utilityCompanies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtilityBillCompany"
+          }
+        }
+      }
+    },
+    "StatusNotificationOption": {
+      "type": "object",
+      "required": [
+        "email",
+        "statusCode"
+      ],
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "example": "200"
+        },
+        "email": {
+          "type": "string",
+          "example": "xyz@gmail.com"
+        }
+      }
+    },
+    "MassPayment": {
+      "type": "object",
+      "properties": {
+        "debtor": {
+          "$ref": "#/definitions/Debtor",
+          "example": "Mike"
+        },
+        "massPaymentCreditor": {
+          "$ref": "#/definitions/MassPaymentCreditor",
+          "example": "Wayne enterprises"
+        },
+        "contactPhoneNumber": {
+          "type": "string",
+          "description": "Contact telephone number of debitor",
+          "example": "344590900"
+        },
+        "adviceNotificationOption": {
+          "$ref": "#/definitions/NotificationOption",
+          "example": "on"
+        },
+        "statusNotificationOption": {
+          "$ref": "#/definitions/StatusNotificationOption",
+          "example": "off"
+        },
+        "chargesPaidBy": {
+          "type": "string",
+          "enum": [
+            "debtor",
+            "creditor",
+            "split"
+          ],
+          "example": "company"
+        },
+        "chargesAccount": {
+          "$ref": "#/definitions/ChargesAccount",
+          "example": "20"
+        },
+        "amount": {
+          "$ref": "#/definitions/Amount",
+          "example": "2000"
+        },
+        "description": {
+          "$ref": "#/definitions/Description",
+          "example": "salary"
+        },
+        "endToEndId": {
+          "type": "string",
+          "example": "123"
+        },
+        "RUB": {
+          "$ref": "#/definitions/RUB",
+          "example": "11"
+        },
+        "executionDate": {
+          "type": "string",
+          "example": "11/10/2018"
+        },
+        "valueDate": {
+          "type": "string",
+          "example": "11/10/2018"
+        }
+      }
+    },
+    "GetGroupPaymentResponse": {
+      "properties": {
+        "filename": {
+          "type": "string"
+        },
+        "numberOfTransactions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalAmount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "endToEndId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "type": {
+          "type": "string"
+        },
+        "executionDate": {
+          "type": "string"
+        },
+        "debtor": {
+          "$ref": "#/definitions/Debtor"
+        },
+        "companyInfo": {
+          "$ref": "#/definitions/CompanyInfo"
+        },
+        "groupPayments": {
+          "$ref": "#/definitions/GroupPayment"
+        }
+      },
+      "additionalProperties": false
+    },
+    "getPaymentStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "example": "success"
+        },
+        "totalDebitAmount": {
+          "$ref": "#/definitions/Amount",
+          "example": "2000"
+        }
+      }
+    },
+    "Attachment": {
+      "type": "object",
+      "required": [
+        "fileData",
+        "fileName"
+      ],
+      "properties": {
+        "fileData": {
+          "type": "string",
+          "example": "xsl"
+        },
+        "fileName": {
+          "type": "string",
+          "example": "salary.xsl"
+        }
+      }
+    },
+    "AuthorizePaymentRequest": {
+      "type": "object",
+      "properties": {
+        "transactionTime": {
+          "type": "string",
+          "description": "Needed only in case of two factor authentication. Time as received in the create payment message",
+          "example": "12:00"
+        },
+        "authCode": {
+          "type": "string",
+          "description": "Subscriber has to provide Auth code in case of two factor authentication. For example OTP entered by Subscriber on the TPP screen.",
+          "example": "123"
+        }
+      }
+    },
+    "FundAvailabilityRequest": {
+      "type": "object",
+      "required": [
+        "accountId",
+        "transaction"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "example": "101"
+        },
+        "accountId": {
+          "type": "string",
+          "example": "12345"
+        },
+        "transaction": {
+          "$ref": "#/definitions/Amount",
+          "example": "2000"
+        }
+      }
+    },
+    "CreateGroupPaymentRequest": {
+      "type": "object",
+      "required": [
+        "companyInfo",
+        "debtor",
+        "groupPayments",
+        "numberOfTransactions",
+        "totalAmount",
+        "type"
+      ],
+      "properties": {
+        "endToEndId": {
+          "type": "string"
+        },
+        "filename": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "salary.xsl"
+        },
+        "numberOfTransactions": {
+          "type": "number",
+          "example": 12
+        },
+        "totalAmount": {
+          "type": "string",
+          "example": "200000"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "PAYROLL",
+            "GROUP_PAYMENT"
+          ],
+          "example": "company"
+        },
+        "executionDate": {
+          "type": "string",
+          "example": "11/12/2018"
+        },
+        "debtor": {
+          "$ref": "#/definitions/Debtor",
+          "example": "Mike"
+        },
+        "companyInfo": {
+          "$ref": "#/definitions/CompanyInfo",
+          "example": "Wayne enterprises"
+        },
+        "groupPayments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupPayment"
+          }
+        }
+      }
+    },
+    "GroupPaymentCreditor": {
+      "type": "object",
+      "required": [
+        "accountId",
+        "bankId"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "example": "101"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "IBAN or Account",
+          "example": "123"
+        },
+        "beneficiaryName": {
+          "type": "string",
+          "example": "John"
+        },
+        "beneficiaryAddress": {
+          "$ref": "#/definitions/ShortAddress",
+          "example": "Nicosia, Cyprus"
+        }
+      }
+    },
+    "CreatePaymentResponse": {
+      "type": "object",
+      "properties": {
+        "authCodeNeeded": {
+          "type": "boolean",
+          "example": "10101"
+        },
+        "payment": {
+          "$ref": "#/definitions/Payment",
+          "example": "salary"
+        }
+      }
+    },
+    "Debtor": {
+      "type": "object",
+      "required": [
+        "accountId"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "example": "101"
+        },
+        "accountId": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "123"
+        }
+      }
+    },
+    "MassPaymentStatus": {
+      "type": "object",
+      "required": [
+        "massPayment",
+        "status"
+      ],
+      "properties": {
+        "massPayment": {
+          "$ref": "#/definitions/MassPayment",
+          "example": "yes"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "example": "success"
+        },
+        "errorDescription": {
+          "type": "string",
+          "example": "none"
+        }
+      }
+    },
+    "ShortAddress": {
+      "type": "object",
+      "required": [
+        "line1",
+        "line2"
+      ],
+      "properties": {
+        "line1": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "#33"
+        },
+        "line2": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "3rd cross"
+        },
+        "line3": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "Nicosia"
+        },
+        "line4": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "Cyprus"
+        }
+      }
+    },
+    "CreateGroupPaymentResponse": {
+      "type": "object",
+      "required": [
+        "paymentId",
+        "status"
+      ],
+      "properties": {
+        "paymentId": {
+          "type": "string",
+          "example": "101"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "example": "success"
+        }
+      }
+    },
+    "Charges": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "service"
+        },
+        "value": {
+          "type": "string",
+          "example": "20"
+        }
+      }
+    },
+    "MassPaymentCreditor": {
+      "type": "object",
+      "required": [
+        "accountId"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "description": "SWIFT code",
+          "example": "101"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "IBAN or Account",
+          "example": "DY4747"
+        },
+        "companyCode": {
+          "type": "string",
+          "example": "123"
+        },
+        "checkDigit": {
+          "type": "string",
+          "example": "123"
+        },
+        "amountCheckDigit": {
+          "type": "string",
+          "example": "123"
+        },
+        "beneficiaryName": {
+          "type": "string",
+          "example": "John"
+        },
+        "beneficiaryAddress": {
+          "$ref": "#/definitions/ShortAddress",
+          "example": "Nicosia, Cyprus"
+        },
+        "bankName": {
+          "type": "string",
+          "example": "BOC"
+        },
+        "nationalId": {
+          "type": "string",
+          "example": "CYP"
+        },
+        "bankCountryCode": {
+          "type": "string",
+          "example": "28229"
+        },
+        "branchName": {
+          "type": "string",
+          "example": "xyz"
+        }
+      }
+    },
+    "RUB": {
+      "type": "object",
+      "properties": {
+        "voCode": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "33"
+        },
+        "BIK": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "rr4"
+        },
+        "INN": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "223"
+        },
+        "correspondentAccount": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "2134324"
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Allowed values CPLT | RJCT | PDNG | AUTH |",
+          "example": "CPLT"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "It will be set to one of the following depending on the status:\n\nCOMPLETED: The transaction has passed all validations and was successfully posted in bank systems.\n\nREJECTED: The transaction was rejected when attempting to post it on the banks systems.Please check error code\n\nPENDING: Processing Pending. Please, check your Transaction Status Page on  Bank portal for more information.\n\nAUTHORISATION: The transaction has been accepted by the bank but needs to be authorized by another user(s) ."
+          }
+        },
+        "refNumber": {
+          "type": "string",
+          "description": "A 9 digit number which the customer uses as a reference for support or for his records",
+          "maxLength": 9,
+          "example": "123567098"
+        }
+      }
+    },
+    "NotificationOption": {
+      "type": "object",
+      "properties": {
+        "faxNumber": {
+          "type": "string",
+          "example": "9328479328"
+        },
+        "email": {
+          "type": "string",
+          "example": "XYZ@gmail.com"
+        }
+      }
+    },
+    "ChargesAccount": {
+      "type": "object",
+      "required": [
+        "accountId",
+        "bankId"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "example": "101"
+        },
+        "accountId": {
+          "type": "string",
+          "example": "123"
+        }
+      }
+    },
+    "UtilityBillCompany": {
+      "type": "object",
+      "required": [
+        "accountCheckDigit",
+        "amountCheckDigit",
+        "companyCode",
+        "companyName"
+      ],
+      "properties": {
+        "companyName": {
+          "type": "string"
+        },
+        "companyCode": {
+          "type": "string"
+        },
+        "amountCheckDigit": {
+          "type": "boolean",
+          "default": false
+        },
+        "accountCheckDigit": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Amount": {
+      "type": "object",
+      "required": [
+        "amount"
+      ],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Amount is in EUR",
+          "example": 2131
+        },
+        "currency": {
+          "type": "string",
+          "description": "3 Character ISO code",
+          "maxLength": 3,
+          "example": "111"
+        },
+        "currencyRate": {
+          "type": "string",
+          "example": "2.0"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "404"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "Info"
+          ],
+          "example": "High"
+        },
+        "description": {
+          "type": "string",
+          "example": "Not found"
+        },
+        "additionalDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalDetails"
+          }
+        }
+      }
+    },
+    "CreatePaymentRequest": {
+      "type": "object",
+      "required": [
+        "creditor",
+        "debtor",
+        "paymentDetails",
+        "transactionAmount"
+      ],
+      "properties": {
+        "debtor": {
+          "$ref": "#/definitions/Debtor",
+          "example": "Mike"
+        },
+        "creditor": {
+          "$ref": "#/definitions/Creditor",
+          "example": "John"
+        },
+        "transactionAmount": {
+          "$ref": "#/definitions/Amount",
+          "example": "2000"
+        },
+        "endToEndId": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "11/12/2018"
+        },
+        "paymentDetails": {
+          "type": "string",
+          "maxLength": 120,
+          "example": "salary"
+        },
+        "terminalId": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "3432"
+        },
+        "branch": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "CYP"
+        },
+        "RUB": {
+          "$ref": "#/definitions/RUB",
+          "example": "22"
+        },
+        "executionDate": {
+          "type": "string",
+          "example": "11/12/2018"
+        },
+        "valueDate": {
+          "type": "string",
+          "example": "11/12/2018"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attachment"
+          }
+        }
+      }
+    },
+    "getMassPaymentStatusResponse": {
+      "type": "object",
+      "required": [
+        "massPaymentStatus",
+        "numberOfInvalidPayments",
+        "numberOfTransactions",
+        "numberOfValidPayments",
+        "totalAmountOfValidPayments",
+        "valueDate"
+      ],
+      "properties": {
+        "numberOfTransactions": {
+          "type": "number",
+          "example": 400
+        },
+        "numberOfValidPayments": {
+          "type": "number",
+          "example": 380
+        },
+        "numberOfInvalidPayments": {
+          "type": "number",
+          "example": 20
+        },
+        "totalAmountOfValidPayments": {
+          "type": "string",
+          "example": "20000"
+        },
+        "massPaymentStatus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MassPaymentStatus"
+          }
+        },
+        "valueDate": {
+          "type": "string",
+          "example": "11/12/2018"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "fatalError": {
+          "type": "boolean",
+          "example": "10101"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "CreateMassPaymentRequest": {
+      "type": "object",
+      "required": [
+        "massPayments",
+        "numberOfTransactions"
+      ],
+      "properties": {
+        "filename": {
+          "type": "string",
+          "example": "salary.xsl"
+        },
+        "numberOfTransactions": {
+          "type": "number",
+          "example": 400
+        },
+        "massPayments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MassPayment"
+          },
+          "example": "400"
+        }
+      }
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "paymentId": {
+          "type": "string",
+          "example": "1213"
+        },
+        "transactionTime": {
+          "type": "string",
+          "example": "12:00"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "example": ""
+        },
+        "debtor": {
+          "$ref": "#/definitions/Debtor"
+        },
+        "creditor": {
+          "$ref": "#/definitions/Creditor"
+        },
+        "transactionAmount": {
+          "$ref": "#/definitions/Amount"
+        },
+        "charges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Charges"
+          }
+        },
+        "totalCharges": {
+          "type": "string",
+          "example": "20"
+        },
+        "endToEndId": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "123"
+        },
+        "paymentDetails": {
+          "type": "string",
+          "maxLength": 140,
+          "example": "salary"
+        },
+        "terminalId": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "123"
+        },
+        "branch": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "CYP"
+        },
+        "RUB": {
+          "$ref": "#/definitions/RUB",
+          "example": ""
+        },
+        "executionDate": {
+          "type": "string",
+          "example": "11/12/2018"
+        },
+        "valueDate": {
+          "type": "string",
+          "example": "11/12/2018"
+        },
+        "totalDebitAmount": {
+          "$ref": "#/definitions/Amount"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attachment"
+          }
+        }
+      }
+    },
+    "GroupPayment": {
+      "type": "object",
+      "required": [
+        "amount"
+      ],
+      "properties": {
+        "groupPaymentCreditor": {
+          "$ref": "#/definitions/GroupPaymentCreditor"
+        },
+        "amount": {
+          "type": "number",
+          "example": 23234
+        },
+        "description": {
+          "$ref": "#/definitions/Description"
+        },
+        "code": {
+          "type": "string",
+          "example": "111"
+        }
+      }
+    },
+    "CompanyInfo": {
+      "type": "object",
+      "required": [
+        "identification"
+      ],
+      "properties": {
+        "identification": {
+          "type": "string",
+          "example": "CYP"
+        },
+        "name": {
+          "type": "string",
+          "example": "Mike"
+        }
+      }
+    },
+    "Creditor": {
+      "type": "object",
+      "required": [
+        "accountId"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "example": "101"
+        },
+        "accountId": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "123"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 35,
+          "example": "Mike"
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 105,
+          "example": "Cyprus"
+        }
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "gateway": "datapower-api-gateway",
+    "cors": {
+      "enabled": true
+    },
+    "assembly": {
+      "execute": [
+        {
+          "invoke": {
+            "title": "invoke",
+            "version": "2.0.0",
+            "verb": "keep",
+            "target-url": "$(target-url)",
+            "follow-redirects": false,
+            "timeout": 60,
+            "parameter-control": {
+              "type": "allowlist",
+              "values": []
+            },
+            "header-control": {
+              "type": "blocklist",
+              "values": []
+            },
+            "inject-proxy-headers": true,
+            "chunked-uploads": true,
+            "persistent-connection": true
+          }
+        }
+      ]
+    },
+    "properties": {
+      "target-url": {
+        "value": "http://example.com/operation-name",
+        "description": "The URL of the target service",
+        "encoded": false
+      }
+    },
+    "servers": [
+      {
+        "url": "https://small-ocp-gw-gateway-apic1082ifix2.apps.apic108x.cp.fyre.ibm.com/testorg/sandbox/psd2",
+        "description": "",
+        "type": [
+          "production",
+          "development"
+        ]
+      }
+    ],
+    "oauth-servers": []
+  }
+}

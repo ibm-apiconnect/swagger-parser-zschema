@@ -1,0 +1,94 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Webhook with Parameters API",
+    "description": "API demonstrating webhooks with parameters",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "test"
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {
+    "orderCreated": {
+      "post": {
+        "summary": "Triggered when an order is created",
+        "description": "This webhook is called when a new order is created in the system",
+        "parameters": [
+          {
+            "name": "X-Webhook-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the webhook event"
+          },
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "HMAC signature for webhook verification"
+          },
+          {
+            "name": "timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Unix timestamp of the event"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "description": "Unique order identifier"
+                  },
+                  "customerId": {
+                    "type": "string",
+                    "description": "Customer identifier"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "Order total amount"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["pending", "confirmed", "shipped"],
+                    "description": "Current order status"
+                  }
+                },
+                "required": ["orderId", "customerId", "amount"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook received successfully"
+          },
+          "400": {
+            "description": "Invalid webhook payload"
+          }
+        }
+      }
+    }
+  }
+}

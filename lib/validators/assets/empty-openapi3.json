@@ -1,0 +1,21 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "x-ibm-name": "empty",
+    "version": "2.0.0",
+    "title": "Empty OAI Doc",
+    "description": "This doc has an empty paths object",
+    "termsOfService": "https://www.example.com/terms-of-service",
+    "contact": {
+      "name": "ACME",
+      "url": "https://www.example.com",
+      "email": "help@example.com"
+    },
+    "license": {
+      "name": "tbd",
+      "url": "https://tbd.com"
+    }
+  },
+  "paths": {},
+  "components": {}
+}

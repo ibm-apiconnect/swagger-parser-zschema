@@ -1,0 +1,72 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Empty Path Item",
+    "description": "An API demonstrating a path item object that is empty which is supported per the OAI v3 spec",
+    "termsOfService": "https://ibm.com/terms",
+    "contact": {
+      "name": "Empty",
+      "email": "empty@example.com",
+      "url": "http://empty-path.example.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://example.com/empty"
+    }
+  ],
+  "paths": {
+    "/users": {},
+    "/me": {
+      "get": {
+        "description": "Gets your own account\n",
+        "operationId": "getMe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Me response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Me": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Me"
+          },
+          {
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "NewPet": {
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

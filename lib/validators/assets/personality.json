@@ -1,0 +1,368 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.0",
+    "title": "Personality Insights",
+    "description": "### Service Overview\nThe IBM Watson&trade; Personality Insights service provides a Representational State Transfer (REST) Application Programming Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer individuals' intrinsic personality characteristics, including Big Five, Needs, and Values, from digital communications such as email, text messages, tweets, and forum posts. The service can automatically infer, from potentially noisy social media, portraits of individuals that reflect their personality characteristics. The service can report consumption preferences based on the results of its analysis, and for JSON content that is timestamped, it can report temporal behavior.\n### API Usage\nThe following information provides details about using the service to obtain a personality profile:\n* **The profile method:** The service offers a single `/v3/profile` method that accepts up to 20 MB of input data and produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, or Spanish and can produce output in a variety of languages.\n* **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials to authenticate via a proxy server that resides in Bluemix, or you can use your credentials to obtain a token and contact the service directly. See [Obtaining credentials for Watson services](http://www.ibm.com/watson/developercloud/doc/getting_started/gs-credentials.shtml) and [Using tokens with Watson services](http://www.ibm.com/watson/developercloud/doc/getting_started/gs-tokens.shtml).\n* **Request Logging:** By default, all Watson services log requests and their results. Data is collected only to improve the Watson services. If you do not want to share your data, set the header parameter `X-Watson-Learning-Opt-Out` to `true` for each request. Data is collected for any request that omits this header. See [Controlling request logging for Watson services](http://www.ibm.com/watson/developercloud/doc/getting_started/gs-logging.shtml).\n\nFor more information, see [Using the Personality Insights service](http://www.ibm.com/watson/developercloud/doc/personality-insights/).",
+    "x-ibm-name": "personality-insights"
+  },
+  "securityDefinitions": [],
+  "security": [],
+  "basePath": "/guiplay/play/personality-insights/api",
+  "paths": {
+    "/v3/profile": {
+      "post": {
+        "tags": ["personality-insights"],
+        "operationId": "profile",
+        "summary": "Generates a personality profile based on input text",
+        "description": "Derives personality insights for up to 20 MB of input data written by an author. Accepts input in Arabic, English, Japanese, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.",
+        "produces": ["application/json", "text/csv"],
+        "consumes": ["application/json", "text/html", "text/plain"],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input and response content.",
+            "required": false,
+            "type": "string",
+            "enum": ["ar", "de", "en", "es", "fr", "it", "ja", "ko", "pt-br", "zh-cn", "zh-tw"],
+            "default": "en"
+          },
+          {
+            "name": "raw_scores",
+            "in": "query",
+            "description": "If `true`, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If `false` (the default), only normalized percentiles are returned.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "csv_headers",
+            "in": "query",
+            "description": "If `true`, column labels are returned with a CSV response; if `false` (the default), they are not. Applies only when the `Accept` header is set to `text/csv`.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "consumption_preferences",
+            "in": "query",
+            "description": "If `true`, information about consumption preferences is returned with the results; if `false` (the default), the response does not include the information.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The requested version of the response format as a date in the form `YYYY-MM-DD`; for example, specify `2016-10-20` for October 20, 2016. The date that you specify does not need to match a version of the service exactly; the service replies with the response format whose version is no later than the date you provide. If you specify a date that is earlier than the initial release of version 3, the service returns the response format for that first version. If you specify a date that is in the future or otherwise later than the most recent version, the service returns the response format for the latest version.",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A maximum of 20 MB of content to analyze. A JSON request must conform to the ContentListContainer model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContentListContainer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**. Profile created.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "400": {
+            "description": "**Bad Request**. The request JSON is not properly formatted, fewer than 100 words are provided, the requested language is not supported, or the version is missing or malformed. Specific messages include: `No version provided` and `Invalid version format`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "401": {
+            "description": "**Unauthorized**. Access is denied due to invalid service credentials.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "429": {
+            "description": "**Too Many Requests**. The service is currently processing too many requests for the content language. Wait a short time and try the request again. If you are submitting many requests for the language, consider throttling the rate at which you submit requests.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "500": {
+            "description": "**Internal Server Error**. The service encountered an internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
+          "504": {
+            "description": "**Gateway Timeout**. The request timed out or took too long to process. Wait a short time and try the request again. If the input contained a large number of words (for example, more than 20,000), consider reducing the number of words while maintaining the guidelines for meaningful input.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Profile": {
+      "required": ["processed_language", "word_count", "personality", "needs", "values", "warnings"],
+      "properties": {
+        "processed_language": {
+          "type": "string",
+          "description": "The language model that was used to process the input; for example, `en`."
+        },
+        "word_count": {
+          "type": "integer",
+          "description": "The number of words that were found in the input."
+        },
+        "word_count_message": {
+          "type": "string",
+          "description": "When guidance is appropriate, a string that provides a message that indicates the number of words found and where that value falls in the range of required or suggested number of words."
+        },
+        "personality": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TraitTreeNode"
+          },
+          "description": "Detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TraitTreeNode"
+          },
+          "description": "Detailed results for the Needs characteristics inferred from the input text."
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TraitTreeNode"
+          },
+          "description": "Detailed results for the Values characteristics inferred from the input text."
+        },
+        "behavior": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BehaviorNode"
+          },
+          "description": "For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms of temporal characteristics. The results include information about the distribution of the content over the days of the week and the hours of the day."
+        },
+        "consumption_preferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumptionPreferencesCategoryNode"
+          },
+          "description": "If the `consumption_preferences` query parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category."
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "description": "Warning messages associated with the input text submitted with the request. The array is empty if the input generated no warnings."
+        }
+      }
+    },
+    "TraitTreeNode": {
+      "required": ["trait_id", "name", "category", "percentile"],
+      "properties": {
+        "trait_id": {
+          "type": "string",
+          "description": "The unique identifier of the characteristic to which the results pertain. IDs have the form `big5_`&lt;characteristic&gt; for Big Five personality characteristics, `need_`&lt;characteristic&gt; for Needs, or `value_`&lt;characteristic&gt; for Values."
+        },
+        "name": {
+          "type": "string",
+          "description": "The user-visible name of the characteristic."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, or `values` for Values."
+        },
+        "percentile": {
+          "type": "number",
+          "format": "double",
+          "description": "The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the population and less open than 39 percent of the population."
+        },
+        "raw_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The raw score for the characteristic. A positive or negative score indicates more or less of the characteristic; zero indicates neutrality or no evidence for a score. The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TraitTreeNode"
+          },
+          "description": "For `personality` (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from the input text."
+        }
+      }
+    },
+    "BehaviorNode": {
+      "required": ["trait_id", "name", "category", "percentage"],
+      "properties": {
+        "trait_id": {
+          "type": "string",
+          "description": "The unique identifier of the characteristic to which the results pertain. IDs have the form `behavior_`&lt;value&gt;."
+        },
+        "name": {
+          "type": "string",
+          "description": "The user-visible name of the characteristic."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the characteristic: `behavior` for temporal data."
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "description": "For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of the week or hour of the day. The range is 0 to 1."
+        }
+      }
+    },
+    "ConsumptionPreferencesCategoryNode": {
+      "required": ["consumption_preference_category_id", "name", "consumption_preferences"],
+      "properties": {
+        "consumption_preference_category_id": {
+          "type": "string",
+          "description": "The unique identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_`&lt;category&gt;."
+        },
+        "name": {
+          "type": "string",
+          "description": "The user-visible name of the consumption preferences category."
+        },
+        "consumption_preferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumptionPreferencesNode"
+          },
+          "description": "Detailed results inferred from the input text for the individual preferences of the category."
+        }
+      }
+    },
+    "ConsumptionPreferencesNode": {
+      "required": ["consumption_preference_id", "name", "score"],
+      "properties": {
+        "consumption_preference_id": {
+          "type": "string",
+          "description": "The unique identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_`&lt;preference&gt;."
+        },
+        "name": {
+          "type": "string",
+          "description": "The user-visible name of the consumption preference."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The score for the consumption preference: `0.0` indicates unlikely, `0.5` indicates neutrality, and `1.0` indicates likely. The scores for some preferences are binary and do not allow a neutral value. The score is an indication of preference based on the results inferred from the input text, not a normalized percentile."
+        }
+      }
+    },
+    "Warning": {
+      "required": ["warning_id", "message"],
+      "properties": {
+        "warning_id": {
+          "type": "string",
+          "description": "The identifier of the warning message, one of `WORD_COUNT_MESSAGE`, `JSON_AS_TEXT`, or `PARTIAL_TEXT_USED`."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message associated with the `warning_id`. For `WORD_COUNT_MESSAGE`, \"There were &lt;number&gt; words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates.\"; for `JSON_AS_TEXT`, \"Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?\"; and for `PARTIAL_TEXT_USED`, \"The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required.\" The `PARTIAL_TEXT_USED` warning applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile."
+        }
+      }
+    },
+    "ContentListContainer": {
+      "required": ["contentItems"],
+      "properties": {
+        "contentItems": {
+          "description": "An array of `ContentItem` objects that provides the text that is to be analyzed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentItem"
+          }
+        }
+      }
+    },
+    "ContentItem": {
+      "required": ["content"],
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content that is to be analyzed. The service supports up to 20 MB of content for all items combined."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this content item."
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data."
+        },
+        "updated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data."
+        },
+        "contenttype": {
+          "description": "MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.",
+          "type": "string",
+          "enum": ["text/plain", "text/html"],
+          "default": "text/plain"
+        },
+        "language": {
+          "description": "Language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the `Content-Type` header overrides the value of this parameter; any content items that specify a different language are ignored. Omit the `Content-Type` header to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.",
+          "type": "string",
+          "enum": ["ar", "en", "es", "ja"],
+          "default": "en"
+        },
+        "parentid": {
+          "type": "string",
+          "description": "Unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.",
+          "default": "null"
+        },
+        "reply": {
+          "type": "boolean",
+          "description": "Indicates whether this content item is a reply to another content item.",
+          "default": false
+        },
+        "forward": {
+          "type": "boolean",
+          "description": "Indicates whether this content item is a forwarded/copied version of another content item.",
+          "default": false
+        }
+      }
+    },
+    "ErrorModel": {
+      "required": ["code", "error"],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "The HTTP status code."
+        },
+        "error": {
+          "type": "string",
+          "description": "A message intended for users that describes the error that occurred."
+        },
+        "help": {
+          "type": "string",
+          "description": "A URL to documentation explaining the cause and possibly solutions for this error."
+        }
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "enforced": true,
+    "testable": true,
+    "phase": "realized"
+  },
+  "host": "apimdev0061.hursley.ibm.com",
+  "schemes": ["https"]
+}

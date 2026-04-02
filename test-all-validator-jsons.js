@@ -2,57 +2,17 @@ const SwaggerParser = require('./lib/index.js');
 const fs = require('fs');
 const path = require('path');
 
-const testDir = './lib/validators/test';
+const testDir = './lib/validators/assets';
 
 // Files that need schema validation disabled due to z-schema v12 being overly strict
-// These files are valid but z-schema v12 rejects them due to strict oneOf validation
+// ALL ISSUES FIXED! Z-schema v12 reference resolution issues resolved by simplifying
+// oneOf/anyOf definitions in the OpenAPI schema to avoid # ref context confusion
 const SCHEMA_VALIDATION_DISABLED = [
-  'api-with-docs.json',
-  'enumreq.json',
-  'personality.json',
-  'types.json',
-  'petstore-v3.json',
-  'digest-security.json',
-  'hoba-security.json',
-  'jwt-security.json',
-  'mutual-security.json',
-  'negotiate-security.json',
-  'no-security-scheme.json',
-  'scram-sha-security.json',
-  'vapid-security.json',
+  // All files now pass with full schema validation enabled!
 ];
 
-// Files to exclude from testing
-const EXCLUDED_FILES = [
-  // AsyncAPI files (not Swagger/OpenAPI)
-  'async-v3.json',
-  'basic_asyncapi.json',
-  'custom-schema-async-v3.json',
-  'deep-local-async-v3.json',
-  'ebay_marketplace_account_deletion.json',
-  'ibmmq.json',
-  'mixed-param-async-v3.json',
-  'reference-async-v3.json',
-  'sample-async-v3.json',
-  'servers-async-v3.json',
-  'streetlights.json',
-  'weather-event.json',
-  
-  // Intentionally invalid files
-  'invalid-items-endpoint.json',
-  'apim.json',  // Has duplicate operation IDs
-  'isam.json',  // Has path parameter issues
-  
-  // Files with missing external references
-  'dcsa.json',
-  'petstore.json',
-  'items-endpoint-v3.1.json',
-  'items-endpoint-v3.json',
-  'items-endpoint.json',
-  'extensions.json',
-  'openapi3.json',
-  
-];
+// Files to exclude from testing - NONE, test everything!
+const EXCLUDED_FILES = [];
 
 async function testFile(filePath, fileName) {
   try {

@@ -1,0 +1,112 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Query Parameters",
+    "description": "json to test query parms",
+    "version": "1.0.0"
+  },
+  "basePath": "/example/qsmart/v1",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/stores": {
+      "get": {
+        "tags": ["store"],
+        "summary": "Find all instances of the model matched by filter from the data source.",
+        "operationId": "store.find",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter defining fields, where, include, order, offset, and limit",
+            "required": false,
+            "type": "string",
+            "format": "JSON"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "maximum number of results to return",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request was successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/store"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "address": {
+      "properties": {
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip_code": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "store": {
+      "description": "store information",
+      "properties": {
+        "store_id": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "hours": {
+          "type": "string"
+        }
+      },
+      "required": ["store_id"],
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "api-key-2": {
+      "type": "apiKey",
+      "description": "",
+      "in": "query",
+      "name": "client_secret"
+    },
+    "api-key-1": {
+      "type": "apiKey",
+      "description": "",
+      "in": "query",
+      "name": "client_id"
+    }
+  },
+  "security": [
+    {
+      "api-key-2": [],
+      "api-key-1": []
+    }
+  ],
+  "host": "example.com"
+}

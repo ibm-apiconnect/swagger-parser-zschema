@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "x-ibm-name": "scopeshttpbin",
+    "title": "Not Enforced with creds",
+    "version": "1.0.0",
+    "description": "",
+    "contact": {
+      "name": ""
+    }
+  },
+  "schemes": ["https"],
+  "basePath": "/httpbin",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "password": {
+      "type": "oauth2",
+      "description": "",
+      "flow": "password",
+      "scopes": {
+        "ip": "desc",
+        "another": "desc1"
+      },
+      "tokenUrl": "https://example.com/jdoe/sb/oauth-provider/oauth2/token"
+    },
+    "application": {
+      "type": "oauth2",
+      "description": "",
+      "flow": "application",
+      "scopes": {
+        "ip": "desc"
+      },
+      "tokenUrl": "https://example.com/jdoe/sb/oauth-provider/oauth2/token"
+    },
+    "access code": {
+      "type": "oauth2",
+      "description": "",
+      "flow": "accessCode",
+      "scopes": {
+        "ip": "desc",
+        "another": "desc1",
+        "andanother": "desc2"
+      },
+      "tokenUrl": "https://example.com/jdoe/sb/oauth-provider/oauth2/token",
+      "authorizationUrl": "https://example.com/jdoe/sb/oauth-provider/oauth2/authorize"
+    },
+    "clientIdHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-IBM-Client-Id"
+    }
+  },
+  "security": [
+    {
+      "clientIdHeader": [],
+      "access code": ["ip", "another"]
+    },
+    {
+      "application": ["ip"],
+      "clientIdHeader": []
+    },
+    {
+      "password": ["ip"],
+      "clientIdHeader": []
+    }
+  ],
+  "paths": {
+    "/ip": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK"
+          }
+        }
+      }
+    },
+    "/get": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK"
+          }
+        }
+      }
+    },
+    "/headers": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "test-header",
+          "type": "string",
+          "required": true,
+          "in": "header",
+          "description": "for testing headers"
+        }
+      ]
+    }
+  },
+  "tags": [],
+  "x-ibm-endpoints": [
+    {
+      "endpointUrl": "https://example.com/jdoe/sb",
+      "type": ["Development", "Production"]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My GraphQL api",
+    "x-ibm-name": "my-graphql-api",
+    "version": "1.0.0"
+  },
+  "basePath": "/myorg/dev/my-graphql-api",
+  "x-ibm-configuration": {
+    "graphql-schema": "#/definitions/graphql-example-server-mybluemix-net",
+    "type": "graphql",
+    "cors": {
+      "enabled": true
+    },
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "servers": [
+      {
+        "url": "https://aredwood-rgw.jarvis-admin.dev.ciondemand.com/myorg/dev/my-graphql-api",
+        "description": "",
+        "type": ["Production", "Development"]
+      }
+    ]
+  },
+  "definitions": {
+    "graphql-example-server-mybluemix-net": {
+      "type": "null",
+      "x-ibm-schema": {
+        "type": "graphql",
+        "url": "https://graphql-example-server.mybluemix.net/",
+        "file": "ZGlyZWN0aXZlIEB0eXBlQ29zdCh3ZWlnaHQ6IEZsb2F0ID0gMS4wLCBuZXN0ZWQ6IEJvb2xlYW4gPSB0cnVlKSBvbiBPQkpFQ1QgfCBJTlRFUkZBQ0UgfCBVTklPTiB8IEVOVU0gfCBTQ0FMQVIgfCBJTlBVVF9PQkpFQ1QKZGlyZWN0aXZlIEBmaWVsZENvc3Qod2VpZ2h0OiBGbG9hdCA9IDEuMCwgYXNzdW1lZExpbWl0OiBJbnQsIGxpbWl0QXJndW1lbnRzOiBbU3RyaW5nXSwgbGltaXRlZEZpZWxkczogW1N0cmluZ10pIG9uIEZJRUxEX0RFRklOSVRJT04KCnNjaGVtYSB7CiAgcXVlcnk6IFF1ZXJ5Cn0KCiIiIiBFbnRyeSBwb2ludHMgZm9yIHF1ZXJpZXMgIiIiCnR5cGUgUXVlcnkgewogIHVzZXIodXNlcm5hbWU6IFN0cmluZyEpOiBVc2VyCiAgdXNlcnMobGltaXQ6IEludCEpOiBbVXNlcl0gQGZpZWxkQ29zdChsaW1pdEFyZ3VtZW50czogWyJsaW1pdCJdKQogIGNvbXBhbnkoaWQ6IFN0cmluZyEpOiBDb21wYW55CiAgY29tcGFuaWVzKGxpbWl0OiBJbnQhKTogW0NvbXBhbnldIEBmaWVsZENvc3QobGltaXRBcmd1bWVudHM6IFsibGltaXQiXSkKfQoKIiIiIEEgVXNlciAiIiIKdHlwZSBVc2VyIHsKICBuYW1lOiBTdHJpbmcKICBhZGRyZXNzOiBBZGRyZXNzCiAgZW1wbG95ZXJJZDogU3RyaW5nCiAgaG9iYmllczogW1N0cmluZ10KICBlbXBsb3llckNvbXBhbnk6IENvbXBhbnkKfQoKIiIiIEFuIGFkZHJlc3MgIiIiCnR5cGUgQWRkcmVzcyB7CiAgc3RyZWV0OiBTdHJpbmcKICBjaXR5OiBTdHJpbmcKfQoKIiIiIEEgQ29tcGFueSAiIiIKdHlwZSBDb21wYW55IHsKICBpZDogU3RyaW5nCiAgbmFtZTogU3RyaW5nCiAgbGVnYWxGb3JtOiBTdHJpbmcKICBjZW9Vc2VybmFtZTogU3RyaW5nCiAgb2ZmaWNlczogW0FkZHJlc3NdIEBmaWVsZENvc3QoYXNzdW1lZExpbWl0OiAxMCkKICBjZW9Vc2VyOiBVc2VyCn0KCg=="
+      }
+    }
+  },
+  "paths": {
+    "/graphql": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variables",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "variables",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/graphql/cost": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "consumes": ["application/json", "application/graphql"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "variables",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "variables",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "securityDefinitions": {
+    "clientID": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-IBM-Client-Id"
+    }
+  },
+  "security": [
+    {
+      "clientID": []
+    }
+  ],
+  "schemes": ["https"],
+  "host": "aredwood-rgw.jarvis-admin.dev.ciondemand.com"
+}

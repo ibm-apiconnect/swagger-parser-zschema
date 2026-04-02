@@ -1,0 +1,97 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NullDefinitionTest",
+    "x-ibm-name": "nulldefinitiontest",
+    "version": "1.0.0"
+  },
+  "x-ibm-configuration": {
+    "cors": {
+      "enabled": true
+    },
+    "gateway": "datapower-gateway",
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "assembly": {
+      "execute": []
+    }
+  },
+  "basePath": "/nulldefinitiontest",
+  "paths": {
+    "/test": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "consumes": [],
+        "produces": []
+      }
+    }
+  },
+  "securityDefinitions": {
+    "clientID": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-IBM-Client-Id"
+    }
+  },
+  "security": [
+    {
+      "clientID": []
+    }
+  ],
+  "schemes": ["https"],
+  "definitions": {
+    "authSuccessOrCallbackResponse": {
+      "type": "object",
+      "description": "response content",
+      "properties": {
+        "callbacks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "input": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "callbacks": [
+          {
+            "type": "PasswordCallback",
+            "input": [
+              {
+                "name": "IDToken3",
+                "value": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

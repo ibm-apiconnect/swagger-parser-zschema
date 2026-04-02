@@ -1,0 +1,184 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "/items"
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "Its All About Security Negotiate (Open API v3)",
+    "description": "API containing request using requestbody",
+    "contact": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "url": "https://www.example.com"
+    },
+    "termsOfService": "https://www.example.com/terms",
+    "x-info-extension": {
+      "Name": "Extension for info section",
+      "Details": {
+        "type": "object",
+        "properties": {
+          "Location": "Somewhere",
+          "Specifics": "over the rainbow"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/basepath": {
+      "put": {
+        "summary": "Put a specific item from the database",
+        "description": "Put a specific item from the database",
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the item to look up (local override)",
+            "schema": {
+              "type": "integer",
+              "format": "int3"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/putItem"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/OK_200_Item_Created"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "itemId",
+          "required": true,
+          "in": "path",
+          "description": "The ID of the item to retrieve (path level)",
+          "schema": {
+            "type": "integer",
+            "format": "int32",
+            "example": 474747
+          }
+        }
+      ]
+    }
+  },
+  "security": [
+    {
+      "MySecScheme": []
+    }
+  ],
+  "x-ibm-endpoints": [
+    {
+      "endpointUrl": "http://example.com:8080",
+      "type": ["development", "production"]
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "MySecScheme": {
+        "description": "my security scheme type http, scheme bearer",
+        "type": "http",
+        "scheme": "negotiate"
+      }
+    },
+    "schemas": {
+      "item": {
+        "properties": {
+          "categories": {
+            "type": "string",
+            "description": "The categories that the item has",
+            "example": "fruit"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the item",
+            "example": "banana"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The ID of the item",
+            "format": "int32",
+            "example": 47
+          }
+        }
+      },
+      "item_created": {
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/result"
+          }
+        },
+        "description": "The response when items are created via the /tolerant/items endpoint",
+        "required": ["result"]
+      },
+      "result": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A brief message describing the result of the operation"
+          },
+          "code": {
+            "type": "integer",
+            "description": "A generic code",
+            "format": "int32"
+          }
+        },
+        "description": "The result object returned by some of the calls to the service"
+      }
+    },
+    "examples": {
+      "item_ex": {
+        "value": {
+          "categories": "schema.example",
+          "name": "example-item",
+          "id": "1234567"
+        }
+      }
+    },
+    "headers": {
+      "x-stacktrace": {
+        "description": "a stacktrace from the server",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "OK_200_Item_Created": {
+        "description": "200 OK",
+        "headers": {
+          "trace": {
+            "$ref": "#/components/headers/x-stacktrace"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/item_created"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "putItem": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/item"
+            }
+          }
+        }
+      }
+    }
+  }
+}

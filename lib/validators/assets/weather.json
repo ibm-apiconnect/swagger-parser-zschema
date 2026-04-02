@@ -1,0 +1,303 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GlobalWeather",
+    "description": "",
+    "x-ibm-name": "globalweather",
+    "version": "1.0.0"
+  },
+  "schemes": ["https"],
+  "basePath": "/GlobalWeather",
+  "produces": ["application/xml"],
+  "consumes": ["text/xml"],
+  "securityDefinitions": {
+    "clientID": {
+      "type": "apiKey",
+      "name": "X-IBM-Client-Id",
+      "in": "header",
+      "description": ""
+    }
+  },
+  "security": [
+    {
+      "clientID": []
+    }
+  ],
+  "x-ibm-configuration": {
+    "type": "wsdl",
+    "wsdl-definition": {
+      "wsdl": "globalweather.wsdl",
+      "service": "GlobalWeather",
+      "port": "GlobalWeatherSoap",
+      "soap-version": "1.1"
+    },
+    "assembly": {
+      "execute": [
+        {
+          "proxy": {
+            "title": "proxy",
+            "target-url": "http://www.webservicex.com/globalweather.asmx"
+          }
+        }
+      ]
+    },
+    "gateway": "datapower-gateway",
+    "enforced": true,
+    "testable": true,
+    "phase": "realized",
+    "cors": {
+      "enabled": true
+    }
+  },
+  "paths": {
+    "/GetWeather": {
+      "post": {
+        "summary": "Operation GetWeather",
+        "description": "Get weather report for all major cities around the world.",
+        "operationId": "GetWeather",
+        "x-ibm-soap": {
+          "soap-action": "http://www.webserviceX.NET/GetWeather",
+          "soap-operation": "{http://www.webserviceX.NET}GetWeather"
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetWeatherInput"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetWeatherOutput"
+            }
+          }
+        }
+      }
+    },
+    "/GetCitiesByCountry": {
+      "post": {
+        "summary": "Operation GetCitiesByCountry",
+        "description": "Get all major\n\t\t\t\tcities by country name(full / part).",
+        "operationId": "GetCitiesByCountry",
+        "x-ibm-soap": {
+          "soap-action": "http://www.webserviceX.NET/GetCitiesByCountry",
+          "soap-operation": "{http://www.webserviceX.NET}GetCitiesByCountry"
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCitiesByCountryInput"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetCitiesByCountryOutput"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Security": {
+      "xml": {
+        "namespace": "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+        "prefix": "wsse"
+      },
+      "type": "object",
+      "properties": {
+        "UsernameToken": {
+          "type": "object",
+          "properties": {
+            "Username": {
+              "type": "string"
+            },
+            "Password": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "GetWeatherInput": {
+      "type": "object",
+      "properties": {
+        "Envelope": {
+          "xml": {
+            "prefix": "soap-env",
+            "namespace": "http://schemas.xmlsoap.org/soap/envelope/"
+          },
+          "type": "object",
+          "properties": {
+            "Header": {
+              "$ref": "#/definitions/GetWeatherHeader"
+            },
+            "Body": {
+              "type": "object",
+              "properties": {
+                "GetWeather": {
+                  "$ref": "#/definitions/GetWeather_tns"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": "\n<soap-env:Envelope xmlns:soap-env=\"http://schemas.xmlsoap.org/soap/envelope/\">\n <soap-env:Header>\n  <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\n   <UsernameToken>\n    <Username>string</Username>\n    <Password>string</Password>\n   </UsernameToken>\n  </wsse:Security>\n </soap-env:Header>\n <soap-env:Body>\n  <tns:GetWeather xmlns:tns=\"http://www.webserviceX.NET\">\n   <tns:CityName>string</tns:CityName>\n   <tns:CountryName>string</tns:CountryName>\n  </tns:GetWeather>\n </soap-env:Body>\n</soap-env:Envelope>"
+    },
+    "GetWeatherHeader": {
+      "type": "object",
+      "properties": {
+        "Security": {
+          "$ref": "#/definitions/Security"
+        }
+      }
+    },
+    "GetWeatherOutput": {
+      "type": "object",
+      "properties": {
+        "Envelope": {
+          "xml": {
+            "prefix": "soap-env",
+            "namespace": "http://schemas.xmlsoap.org/soap/envelope/"
+          },
+          "type": "object",
+          "properties": {
+            "Body": {
+              "type": "object",
+              "properties": {
+                "GetWeatherResponse": {
+                  "$ref": "#/definitions/GetWeatherResponse_tns"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": "\n<soap-env:Envelope xmlns:soap-env=\"http://schemas.xmlsoap.org/soap/envelope/\">\n <soap-env:Body>\n  <tns:GetWeatherResponse xmlns:tns=\"http://www.webserviceX.NET\">\n   <tns:GetWeatherResult>string</tns:GetWeatherResult>\n  </tns:GetWeatherResponse>\n </soap-env:Body>\n</soap-env:Envelope>"
+    },
+    "GetCitiesByCountryInput": {
+      "type": "object",
+      "properties": {
+        "Envelope": {
+          "xml": {
+            "prefix": "soap-env",
+            "namespace": "http://schemas.xmlsoap.org/soap/envelope/"
+          },
+          "type": "object",
+          "properties": {
+            "Header": {
+              "$ref": "#/definitions/GetCitiesByCountryHeader"
+            },
+            "Body": {
+              "type": "object",
+              "properties": {
+                "GetCitiesByCountry": {
+                  "$ref": "#/definitions/GetCitiesByCountry_tns"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": "\n<soap-env:Envelope xmlns:soap-env=\"http://schemas.xmlsoap.org/soap/envelope/\">\n <soap-env:Header>\n  <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\n   <UsernameToken>\n    <Username>string</Username>\n    <Password>string</Password>\n   </UsernameToken>\n  </wsse:Security>\n </soap-env:Header>\n <soap-env:Body>\n  <tns:GetCitiesByCountry xmlns:tns=\"http://www.webserviceX.NET\">\n   <tns:CountryName>string</tns:CountryName>\n  </tns:GetCitiesByCountry>\n </soap-env:Body>\n</soap-env:Envelope>"
+    },
+    "GetCitiesByCountryHeader": {
+      "type": "object",
+      "properties": {
+        "Security": {
+          "$ref": "#/definitions/Security"
+        }
+      }
+    },
+    "GetCitiesByCountryOutput": {
+      "type": "object",
+      "properties": {
+        "Envelope": {
+          "xml": {
+            "prefix": "soap-env",
+            "namespace": "http://schemas.xmlsoap.org/soap/envelope/"
+          },
+          "type": "object",
+          "properties": {
+            "Body": {
+              "type": "object",
+              "properties": {
+                "GetCitiesByCountryResponse": {
+                  "$ref": "#/definitions/GetCitiesByCountryResponse_tns"
+                }
+              }
+            }
+          }
+        }
+      },
+      "example": "\n<soap-env:Envelope xmlns:soap-env=\"http://schemas.xmlsoap.org/soap/envelope/\">\n <soap-env:Body>\n  <tns:GetCitiesByCountryResponse xmlns:tns=\"http://www.webserviceX.NET\">\n   <tns:GetCitiesByCountryResult>string</tns:GetCitiesByCountryResult>\n  </tns:GetCitiesByCountryResponse>\n </soap-env:Body>\n</soap-env:Envelope>"
+    },
+    "GetWeather_tns": {
+      "xml": {
+        "namespace": "http://www.webserviceX.NET",
+        "prefix": "tns"
+      },
+      "type": "object",
+      "properties": {
+        "CityName": {
+          "type": "string"
+        },
+        "CountryName": {
+          "type": "string"
+        }
+      },
+      "example": "\n<tns:GetWeather xmlns:tns=\"http://www.webserviceX.NET\">\n <tns:CityName>string</tns:CityName>\n <tns:CountryName>string</tns:CountryName>\n</tns:GetWeather>"
+    },
+    "GetWeatherResponse_tns": {
+      "xml": {
+        "namespace": "http://www.webserviceX.NET",
+        "prefix": "tns"
+      },
+      "type": "object",
+      "properties": {
+        "GetWeatherResult": {
+          "type": "string"
+        }
+      },
+      "example": "\n<tns:GetWeatherResponse xmlns:tns=\"http://www.webserviceX.NET\">\n <tns:GetWeatherResult>string</tns:GetWeatherResult>\n</tns:GetWeatherResponse>"
+    },
+    "GetCitiesByCountry_tns": {
+      "xml": {
+        "namespace": "http://www.webserviceX.NET",
+        "prefix": "tns"
+      },
+      "type": "object",
+      "properties": {
+        "CountryName": {
+          "type": "string"
+        }
+      },
+      "example": "\n<tns:GetCitiesByCountry xmlns:tns=\"http://www.webserviceX.NET\">\n <tns:CountryName>string</tns:CountryName>\n</tns:GetCitiesByCountry>"
+    },
+    "GetCitiesByCountryResponse_tns": {
+      "xml": {
+        "namespace": "http://www.webserviceX.NET",
+        "prefix": "tns"
+      },
+      "type": "object",
+      "properties": {
+        "GetCitiesByCountryResult": {
+          "type": "string"
+        }
+      },
+      "example": "\n<tns:GetCitiesByCountryResponse xmlns:tns=\"http://www.webserviceX.NET\">\n <tns:GetCitiesByCountryResult>string</tns:GetCitiesByCountryResult>\n</tns:GetCitiesByCountryResponse>"
+    }
+  }
+}

@@ -1,0 +1,541 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "x-ibm-name": "lur",
+    "version": "2.0.0",
+    "title": "IBM API Connect LUR APIs"
+  },
+  "schemes": ["https"],
+  "host": "localhost:3004",
+  "x-juhu-proxy-host": "localhost",
+  "x-juhu-proxy-port": 3004,
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "clientIdHeader": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-IBM-Client-Id"
+    }
+  },
+  "paths": {
+    "/user-registry-create": {
+      "post": {
+        "operationId": "user_registry_create",
+        "summary": "Create a user registry",
+        "description": "Create a new user registry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User registry to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistryCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful create",
+            "schema": {
+              "$ref": "#/definitions/UserRegistry"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created registry",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-registry-get": {
+      "post": {
+        "operationId": "user_registry_userRegistryGet",
+        "summary": "Get a user registry",
+        "description": "Get a previously defined user registry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User registry to retrieve",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval",
+            "schema": {
+              "$ref": "#/definitions/UserRegistry"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the returned user registry",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-registry-delete": {
+      "post": {
+        "operationId": "user_registry_userRegistryDelete",
+        "summary": "Delete a user registry",
+        "description": "Delete a user registry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User registry to delete",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful delete",
+            "schema": {
+              "$ref": "#/definitions/UserRegistry"
+            },
+            "headers": {
+              "Location": {
+                "description": "The former location of the deleted user registry",
+                "type": "string"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden due to user entries being present",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-create": {
+      "post": {
+        "operationId": "user_userCreate",
+        "summary": "Creates a user entry",
+        "description": "Creates a user entry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created user",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-get": {
+      "post": {
+        "operationId": "user_userGet",
+        "summary": "Returns a user entry from a user registry",
+        "description": "Returns a user entry from a user registry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User to retrieve",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful user retrieval",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the user entry",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-update": {
+      "post": {
+        "operationId": "user_userUpdate",
+        "summary": "Updates a user entry",
+        "description": "Updates an existing user entry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created user",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-delete": {
+      "post": {
+        "operationId": "user_userDelete",
+        "summary": "Deletes a user entry",
+        "description": "Deletes a user entry",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful deletion",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the deleted user entry",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user-login": {
+      "post": {
+        "operationId": "user_userLogin",
+        "summary": "Logs in a user on lur",
+        "description": "Logs in a user on lur",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User credentials",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created user",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserRegistry": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "org": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "user_registry_type": {
+          "type": "string"
+        },
+        "ldap": {
+          "type": "object",
+          "$ref": "#/definitions/LDAP"
+        },
+        "lur": {
+          "type": "object",
+          "$ref": "#/definitions/LUR"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "UserRegistryCreate": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "org": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "user_registry_type": {
+          "type": "string"
+        },
+        "ldap": {
+          "type": "object",
+          "$ref": "#/definitions/LDAP"
+        },
+        "lur": {
+          "type": "object",
+          "$ref": "#/definitions/LUR"
+        }
+      }
+    },
+    "UserRegistryUpdate": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "user_registry_type": {
+          "type": "string"
+        },
+        "ldap": {
+          "type": "object",
+          "$ref": "#/definitions/LDAP"
+        },
+        "lur": {
+          "type": "object",
+          "$ref": "#/definitions/LUR"
+        }
+      }
+    },
+    "UserRegistryList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_results": {
+          "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "$ref": "#/definitions/UserRegistry"
+            }
+          ]
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      }
+    },
+    "UserCreate": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
+    },
+    "UserList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_results": {
+          "type": "integer"
+        },
+        "users": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "$ref": "#/definitions/User"
+            }
+          ]
+        }
+      }
+    },
+    "LUR": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "LDAP": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "Error": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "integer"
+        },
+        "message": {
+          "type": ["string", "array"]
+        }
+      }
+    }
+  }
+}

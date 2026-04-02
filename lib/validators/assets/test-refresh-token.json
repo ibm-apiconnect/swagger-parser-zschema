@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Test Refresh Token API",
+    "description": "Test API specifically for TestToolRefreshToken component E2E testing"
+  },
+  "x-ibm-configuration": {
+    "oauth-servers": {
+      "testOAuth": {
+        "authorizationCode": {
+          "tokenUrls": ["https://example.com/oauth2/token"],
+          "authorizationUrls": ["https://example.com/oauth2/authorize"],
+          "refreshUrls": ["https://example.com/oauth2/refresh"]
+        }
+      }
+    },
+    "testable": true,
+    "enforced": false
+  },
+  "paths": {
+    "/test": {
+      "get": {
+        "summary": "Test endpoint",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "testOAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "testOAuth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://example.com/oauth2/authorize",
+            "tokenUrl": "https://example.com/oauth2/token",
+            "refreshUrl": "https://example.com/oauth2/refresh",
+            "scopes": {
+              "read": "Read access",
+              "write": "Write access"
+            }
+          }
+        },
+        "x-key-type": "clientId"
+      }
+    }
+  },
+  "security": [
+    {
+      "testOAuth": []
+    }
+  ]
+}

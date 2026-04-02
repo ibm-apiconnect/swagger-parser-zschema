@@ -1,0 +1,598 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "/items"
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "Items Endpoint API (Open API V3.1)",
+    "summary": "The OAI3.1 version - This summary is testament to the strong will carried by IBMers",
+    "x-ibm-name": "Items-Endpoint-API-OAI3.1",
+    "description": "The OAI3.1 version - Various resources created from the /tolerant/items endpoint",
+    "contact": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "url": "https://www.example.com"
+    },
+    "termsOfService": "https://www.example.com/terms",
+    "x-info-extension": {
+      "Name": "Extension for info section",
+      "Details": {
+        "type": "object",
+        "properties": {
+          "Location": "Somewhere",
+          "Specifics": "over the rainbow"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/specific/item/{itemId}": {
+      "get": {
+        "operationId": "getItem",
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "x-response-extension": {
+              "Name": "Extension for an inline operation level response definition",
+              "Details": {
+                "type": "object",
+                "properties": {
+                  "Location": "Somewhere",
+                  "Specifics": "over the rainbow"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/item"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/item"
+                }
+              }
+            },
+            "headers": {
+              "x-call-identifier": {
+                "description": "a unique identifier for the call",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-stacktrace": {
+                "$ref": "#/components/headers/x-stacktrace"
+              }
+            }
+          },
+          "404": {
+            "description": "404 Not Found"
+          }
+        },
+        "tags": ["retrieve", "item", "one"],
+        "summary": "Get a specific item from the database",
+        "description": "Get a specific item from the database",
+        "x-get-extension": {
+          "Name": "Extension for GET /item/{itemId}",
+          "Details": {
+            "type": "object",
+            "properties": {
+              "Location": "Somewhere",
+              "Specifics": "over the rainbow"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the item to look up",
+            "x-get-itemId-parameter-extension": {
+              "Name": "Extension for itemId parameter on GET /item/{itemId}",
+              "Details": {
+                "type": "object",
+                "properties": {
+                  "Location": "Somewhere",
+                  "Specifics": "over the rainbow"
+                }
+              }
+            },
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["update", "item", "one"],
+        "summary": "Update the specified item replacing the old definition with the new one",
+        "description": "Update the specified item replacing the old definition with the new one",
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the item to update",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/item"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item"
+              }
+            }
+          },
+          "description": "The definition of the item",
+          "required": true
+        }
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "201 Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["create", "item", "one"],
+        "summary": "Create a new item in the items database",
+        "description": "Create a new item in the items database",
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the item to create",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/item"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/item"
+              }
+            }
+          },
+          "description": "The definition of the item to create",
+          "required": true
+        }
+      },
+      "delete": {
+        "operationId": "deleteItem",
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["remove", "item", "one"],
+        "summary": "Delete the specified item from the items database",
+        "description": "Delete the specified item from the items database",
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the item to delete",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ]
+      }
+    },
+    "/all/items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/items_body"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/items_body"
+                }
+              }
+            },
+            "links": {
+              "getItemById": {
+                "$ref": "#/components/links/getItem"
+              },
+              "deleteItemById": {
+                "$ref": "#/components/links/deleteItem"
+              },
+              "fakeLink": {
+                "$ref": "#/components/links/fakeLink"
+              }
+            }
+          }
+        },
+        "tags": ["items", "retrieve"],
+        "summary": "Get all of the items in the items database",
+        "description": "Get all of the items in the items database"
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "201 Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["items", "create"],
+        "summary": "Create multiple new items in the items database",
+        "description": "Create multiple new items in the items database",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/items_body"
+        }
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["update", "items"],
+        "summary": "Update a number of items in the items database",
+        "description": "Update a number of items in the items database",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/items_body"
+        }
+      }
+    },
+    "/test/servers/override": {
+      "servers": [
+        {
+          "url": "/path/items"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/items_body"
+                }
+              }
+            }
+          }
+        },
+        "description": "Fake api used for a test"
+      },
+      "put": {
+        "servers": [
+          {
+            "url": "/operation/items"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Items_created_or_Updated"
+                }
+              }
+            }
+          }
+        },
+        "description": "Fake api used for a test"
+      }
+    }
+  },
+  "security": [
+    {
+      "Client-ID": []
+    }
+  ],
+  "x-ibm-configuration": {
+    "gateway": "datapower-gateway",
+    "enforced": true,
+    "phase": "realized",
+    "testable": true,
+    "cors": {
+      "enabled": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://example.com:8443/html/rest.html",
+    "description": "External documentation for the endpoint that sits behind this API"
+  },
+  "x-ibm-endpoints": [
+    {
+      "endpointUrl": "http://example.com:8080",
+      "type": ["development", "production"]
+    }
+  ],
+  "tags": [
+    {
+      "name": "apiTag1",
+      "description": "this is tag 1",
+      "x-tag-extension": {
+        "Name": "Extension for an api tag",
+        "Details": {
+          "type": "object",
+          "properties": {
+            "Location": "Somewhere",
+            "Specifics": "over the rainbow"
+          }
+        }
+      }
+    },
+    {
+      "name": "apiTag2",
+      "description": "this is tag 2"
+    }
+  ],
+  "x-banking": {
+    "Branch type": "Walk in",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "citystate": "San Francisco, CA"
+    }
+  },
+  "x-card": {
+    "Card type": "visa",
+    "Card number": 123456
+  },
+  "components": {
+    "links": {
+      "getItem": {
+        "operationId": "getItem",
+        "description": "This is just a test",
+        "parameters": {
+          "uid": "$response.body#/userId"
+        }
+      },
+      "deleteItem": {
+        "operationRef": "deleteItem"
+      }
+    },
+    "parameters": {
+      "globalParam": {
+        "name": "globalParam",
+        "in": "header",
+        "x-global-param-extension": {
+          "Name": "Extension for an api level parameter",
+          "Details": {
+            "type": "object",
+            "properties": {
+              "Location": "Somewhere",
+              "Specifics": "over the rainbow"
+            }
+          }
+        },
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
+      "items_body": {
+        "content": {
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/items_body"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/items_body"
+            }
+          }
+        },
+        "description": "The request body to send",
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "Client-ID": {
+        "description": "The client_id of your subscribed application",
+        "in": "query",
+        "name": "client_id",
+        "type": "apiKey",
+        "x-security-extension": {
+          "Name": "Extension for a security definition",
+          "Details": {
+            "type": "object",
+            "properties": {
+              "Location": "Somewhere",
+              "Specifics": "over the rainbow"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "result": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A brief message describing the result of the operation"
+          },
+          "code": {
+            "type": "integer",
+            "description": "A generic code",
+            "format": "int32"
+          }
+        },
+        "description": "The result object returned by some of the calls to the /tolerant/items service",
+        "required": ["code", "message"],
+        "x-response-extension": {
+          "Name": "Extension for a response definition",
+          "Details": {
+            "type": "object",
+            "properties": {
+              "Location": "Somewhere",
+              "Specifics": "over the rainbow"
+            }
+          }
+        }
+      },
+      "item": {
+        "properties": {
+          "categories": {
+            "type": "string",
+            "description": "The categories that the item has"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the item"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The ID of the item",
+            "format": "int32"
+          },
+          "itemType": {
+            "type": "string",
+            "description": "The ID of the item"
+          }
+        },
+        "discriminator": {
+          "propertyName": "itemType"
+        },
+        "required": ["id", "name", "categories"],
+        "additionalProperties": false
+      },
+      "items_body": {
+        "properties": {
+          "item": {
+            "type": "string",
+            "$ref": "#/components/schemas/array_of_items",
+            "description": "A representation of the items"
+          }
+        },
+        "required": ["item"]
+      },
+      "Items_created_or_Updated": {
+        "properties": {
+          "result": {
+            "type": "string",
+            "description": "The wrapper around the result",
+            "$ref": "#/components/schemas/result"
+          }
+        },
+        "description": "The response when items are created via the /tolerant/items endpoint",
+        "required": ["result"]
+      },
+      "array_of_items": {
+        "description": "An array of items",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/item"
+        }
+      }
+    },
+    "headers": {
+      "x-stacktrace": {
+        "description": "a stacktrace from the server",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

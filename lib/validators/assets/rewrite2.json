@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "x-ibm-name": "responses-using-ref",
+    "title": "Responses using rewrite2 $ref",
+    "version": "1.0.0",
+    "description": "## Known issues\n- Responses using $ref don't render properly"
+  },
+  "x-ibm-endpoints": [
+    {
+      "endpointUrl": "https://my-prod-server.com",
+      "type": ["production"],
+      "description": "I'm a description - markdown supported"
+    },
+    {
+      "endpointUrl": "https://my-dev-server.com/sandbox",
+      "type": ["development"]
+    }
+  ],
+  "schemes": ["http", "https"],
+  "host": "$(catalog.host)",
+  "basePath": "/responses-using-ref",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "clientId": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "client_id"
+    },
+    "clientSecret": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "client_secret"
+    },
+    "generic": {
+      "type": "oauth2",
+      "description": "Doesn't use `$(catalog.url)`",
+      "flow": "accessCode",
+      "authorizationUrl": "https://my-oauth-server.com/oauth2/v2/auth",
+      "scopes": {
+        "one": "",
+        "two": ""
+      },
+      "tokenUrl": "https://my-oauth-server.com/oauth2/v4/token"
+    }
+  },
+  "security": [
+    {
+      "clientId": [],
+      "clientSecret": [],
+      "generic": []
+    }
+  ],
+  "x-ibm-configuration": {
+    "testable": true,
+    "enforced": true,
+    "cors": {
+      "enabled": true
+    },
+    "assembly": {
+      "execute": [
+        {
+          "invoke": {
+            "target-url": "https://example.com:8443/tolerant/items"
+          }
+        }
+      ]
+    },
+    "phase": "realized"
+  },
+  "paths": {
+    "/items": {
+      "get": {
+        "responses": {
+          "200": {
+            "$ref": "#/responses/200"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "description": "descriptive text of the 403 error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Everything is OK",
+      "schema": {
+        "$ref": "#/definitions/items"
+      }
+    },
+    "400": {
+      "description": "Invalid Item",
+      "schema": {
+        "$ref": "#/definitions/errorResponse"
+      }
+    },
+    "401": {
+      "description": "Invalid Credentials",
+      "schema": {
+        "$ref": "#/definitions/errorResponse"
+      }
+    },
+    "500": {
+      "description": "This should never happen but happens surprisingly often for some reason...",
+      "schema": {
+        "$ref": "#/definitions/internalErrorResponse"
+      }
+    }
+  },
+  "definitions": {
+    "internalErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The message associated with the error"
+        },
+        "contact": {
+          "type": "string",
+          "description": "The contact details for the support team who can help with this internal error"
+        }
+      },
+      "additionalProperties": false
+    },
+    "errorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The message associated with the error"
+        },
+        "suggestion": {
+          "type": "string",
+          "description": "A suggestion workaround or general guidance about how to solve the problem"
+        }
+      },
+      "additionalProperties": false
+    },
+    "item": {
+      "properties": {
+        "categories": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    }
+  }
+}

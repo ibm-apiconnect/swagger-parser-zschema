@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Websocket",
+    "description": "A sample websocket api that connects to a localserver"
+  },
+  "servers": [
+    {
+      "url": "ws://localhost:80"
+    },
+    {
+      "url": "ws://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/": {
+      "servers": [
+        {
+          "url": "https://localhost:81"
+        },
+        {
+          "url": "localhost:81"
+        },
+        {
+          "url": "wss://localhost:8080"
+        }
+      ],
+      "get": {
+        "servers": [
+          {
+            "url": "ws://localhost:8080"
+          }
+        ],
+        "description": "Connect to the websocket",
+        "operationId": "socket",
+        "responses": {
+          "204": {
+            "description": "No response for  now"
+          }
+        }
+      }
+    },
+    "/protocol": {
+      "servers": [
+        {
+          "url": "https://localhost:81"
+        },
+        {
+          "url": "localhost:81"
+        },
+        {
+          "url": "wss://localhost:8080"
+        }
+      ],
+      "get": {
+        "servers": [
+          {
+            "url": "ws://localhost:8080"
+          },
+          {
+            "url": "wss://localhost:8080"
+          },
+          {
+            "url": "https://localhost:8080"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Sec-WeBSocket-Protocol",
+            "in": "header",
+            "description": "subprotocol to use",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Connect to the websocket",
+        "operationId": "socket",
+        "responses": {
+          "204": {
+            "description": "No response for  now"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,693 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Multiple Examples",
+    "version": "20.0",
+    "x-ibm-name": "test",
+    "contact": {},
+    "servers": [
+      {
+        "url": "",
+        "description": "developer"
+      }
+    ]
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Adds a new user",
+        "requestBody": {
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "JessicxYaml": {
+                  "value": {
+                    "id": 10,
+                    "name": "YamlJessica Smith"
+                  }
+                },
+                "RoneYaml": {
+                  "value": {
+                    "id": 11,
+                    "name": "YamlRon Stewart"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "JessicxXml": {
+                  "value": {
+                    "id": 10,
+                    "name": "XMLJessica Smith"
+                  }
+                },
+                "RoneXml": {
+                  "value": {
+                    "id": 11,
+                    "name": "XMLlRon Stewart"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "JessicaJson": {
+                  "value": {
+                    "id": 10,
+                    "name": "JsonJessica Smith"
+                  }
+                },
+                "RonJSON": {
+                  "value": {
+                    "id": 11,
+                    "name": "JsonRon Stewart"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "JessicaYaml": {
+                    "value": {
+                      "id": 10,
+                      "name": "Jessica Smith"
+                    }
+                  },
+                  "RonYaml": {
+                    "value": {
+                      "id": 11,
+                      "name": "Ron Stewart"
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "JessicaXML": {
+                    "value": {
+                      "id": 10,
+                      "name": "Jessica Smith"
+                    }
+                  },
+                  "RonXml": {
+                    "value": {
+                      "id": 11,
+                      "name": "Ron Stewart"
+                    }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "Jessica": {
+                    "value": {
+                      "id": 10,
+                      "name": "JsonJessica Smith"
+                    }
+                  },
+                  "Ron": {
+                    "value": {
+                      "id": 11,
+                      "name": "JsonRon Stewart"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usersDeep": {
+      "post": {
+        "summary": "Adds a new user",
+        "requestBody": {
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeep"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeep"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeep"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeep"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeep"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeep"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usersDeepNoRef": {
+      "post": {
+        "summary": "Adds a new user",
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "examples": {
+                  "Jessicx": {
+                    "value": {
+                      "id": 10,
+                      "name": "XMLJessica Smith"
+                    }
+                  },
+                  "Rone": {
+                    "value": {
+                      "id": 11,
+                      "name": "XMLRon Stewart"
+                    }
+                  }
+                },
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New order"
+                  }
+                }
+              }
+            },
+            "application/yaml": {
+              "schema": {
+                "type": "object",
+                "examples": {
+                  "Jessicx": {
+                    "value": {
+                      "id": 10,
+                      "name": "YamlJessica Smith"
+                    }
+                  },
+                  "Ron": {
+                    "value": {
+                      "id": 11,
+                      "name": "YamlRon Stewart"
+                    }
+                  }
+                },
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New order"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "examples": {
+                  "Jessicx": {
+                    "value": {
+                      "id": 10,
+                      "name": "JSONJessica Smith"
+                    }
+                  },
+                  "Rone": {
+                    "value": {
+                      "id": 11,
+                      "name": "JSONRon Stewart"
+                    }
+                  }
+                },
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "New order"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "type": "object",
+                  "examples": {
+                    "Jessicx": {
+                      "value": {
+                        "id": 10,
+                        "name": "YamlJessica Smith"
+                      }
+                    },
+                    "Rone": {
+                      "value": {
+                        "id": 11,
+                        "name": "YamlRon Stewart"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "New order"
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "examples": {
+                    "Jessicx": {
+                      "value": {
+                        "id": 10,
+                        "name": "XMLJessica Smith"
+                      }
+                    },
+                    "Rone": {
+                      "value": {
+                        "id": 11,
+                        "name": "XMLRon Stewart"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "New order"
+                    }
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "examples": {
+                    "Jessicx": {
+                      "value": {
+                        "id": 10,
+                        "name": "JSONJessica Smith"
+                      }
+                    },
+                    "Rone": {
+                      "value": {
+                        "id": 11,
+                        "name": "JSONRon Stewart"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "New order"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usersArray": {
+      "post": {
+        "summary": "Adds a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserArray"
+              },
+              "examples": {
+                "Jessica": [10, "YamlJessica Smith"],
+                "Rone": [11, "YamlRon Stewart"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserArray"
+                },
+                "examples": {
+                  "Jessica": [10, "YamlJessica Smith"],
+                  "Rone": [11, "YamlRon Stewart"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usersDeepArray": {
+      "post": {
+        "summary": "Adds a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeepArray"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeepArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usersDeepNoRefArray": {
+      "post": {
+        "summary": "Adds a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Jessica": ["10", "YamlJessica Smith"],
+                  "Rone": ["11", "YamlRon Stewart"]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": {
+                    "Jessica": ["10", "YamlJessica Smith"],
+                    "Rone": ["11", "YamlRon Stewart"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/parameterTypes": {
+      "post": {
+        "summary": "Adds a new user",
+        "parameters": [
+          {
+            "name": "itemId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "$ref": "#/components/schemas/UserDeep"
+            }
+          },
+          {
+            "name": "secretSauce",
+            "required": true,
+            "in": "cookie",
+            "description": "Do you want secret sauce?",
+            "schema": {
+              "$ref": "#/components/schemas/UserDeep"
+            }
+          },
+          {
+            "name": "advancedNumber",
+            "in": "query",
+            "description": "Parameter with all number attributes",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/UserDeep"
+            }
+          },
+          {
+            "name": "optionalBoolean",
+            "in": "header",
+            "description": "Boolean parameter that's optional",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/UserDeep"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeep"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UserProp"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeep"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "as",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeep"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeep"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeep"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "cors": {
+      "enabled": true
+    },
+    "gateway": "datapower-api-gateway",
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "assembly": {
+      "execute": [
+        {
+          "invoke": null,
+          "title": "invoke",
+          "version": "2.0.0",
+          "verb": "keep",
+          "target-url": "$(target-url)",
+          "follow-redirects": false,
+          "timeout": 60,
+          "parameter-control": {
+            "type": "blocklist",
+            "values": []
+          },
+          "header-control": {
+            "type": "blocklist",
+            "values": []
+          },
+          "inject-proxy-headers": true,
+          "properties": {
+            "target-url": {
+              "value": "http://example.com/operation-name",
+              "description": "The URL of the target service",
+              "encoded": false
+            }
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserProp": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "examples": {
+              "one": 1,
+              "two": 2
+            }
+          },
+          "name": {
+            "type": "string",
+            "examples": {
+              "one": "one",
+              "two": "two"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "New order"
+          }
+        }
+      },
+      "UserArray": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "UserDeep": {
+        "type": "object",
+        "examples": {
+          "Jessicx": {
+            "value": {
+              "id": 10,
+              "name": "AnyJessica Smith"
+            }
+          },
+          "Rone": {
+            "value": {
+              "id": 11,
+              "name": "AnyRon Stewart"
+            }
+          }
+        },
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "New order"
+          }
+        }
+      },
+      "UserDeepArray": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "examples": {
+          "Jessica": ["10", "YamlJessica Smith"],
+          "Rone": ["11", "YamlRon Stewart"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,620 @@
+{
+  "asyncapi": "2.0.0",
+  "info": {
+    "title": "Weather events",
+    "description": "Events relating to weather readings from various locales. Contact the admin to get access.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Weather Cluster Admin",
+      "email": "admin@org.domain.com"
+    }
+  },
+  "servers": {
+    "broker1": {
+      "url": "broker1.hostname.com:9092",
+      "description": "Broker located in Hursley",
+      "protocol": "kafka-secure",
+      "protocolVersion": "2.6",
+      "security": [
+        {
+          "scramCredentials": []
+        }
+      ]
+    },
+    "broker2": {
+      "url": "broker2.hostname.com:9092",
+      "description": "Broker located in Hursley",
+      "protocol": "kafka-secure",
+      "protocolVersion": "2.6",
+      "security": [
+        {
+          "example_oauth": ["write:all"]
+        }
+      ]
+    },
+    "broker3": {
+      "url": "broker3.hostname.com:9092",
+      "description": "Broker located in Eastleigh",
+      "protocol": "kafka-secure",
+      "protocolVersion": "2.6",
+      "security": [
+        {
+          "example_openIdConnect": ["read:all"]
+        }
+      ]
+    },
+    "broker4": {
+      "url": "broker4.hostname.com:9092",
+      "description": "Broker located in Eastleigh",
+      "protocol": "kafka-secure",
+      "protocolVersion": "2.6",
+      "security": [
+        {
+          "scramCredentials": []
+        }
+      ]
+    }
+  },
+  "channels": {
+    "weather.temperatures.home": {
+      "description": "A topic containing the temperatures registered at my home",
+      "subscribe": {
+        "summary": "Back door sensor readings",
+        "description": "Temperatures readings taken every 15 minutes",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "oneOf": [
+            {
+              "$ref": "#/components/messages/temperatures"
+            },
+            {
+              "$ref": "#/components/messages/temperaturesV2"
+            }
+          ]
+        }
+      }
+    },
+    "weather.temperatures.work": {
+      "subscribe": {
+        "summary": "A topic containing the temperatures registered at work",
+        "description": "Temperatures readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/providedBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/temperaturesV2"
+        }
+      }
+    },
+    "weather.wind.work": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed and direction registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/wind"
+        }
+      }
+    },
+    "weather.wind.work.json": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed and direction registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/wind-json"
+        }
+      }
+    },
+    "weather.wind.work.openapi": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed and direction registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/wind-openapi"
+        }
+      }
+    },
+    "weather.wind.speed": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/windspeed"
+        }
+      }
+    },
+    "weather.wind.speed.avro": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/windspeed2"
+        }
+      }
+    },
+    "weather.wind.home": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        }
+      }
+    },
+    "weather.wind.home.example": {
+      "subscribe": {
+        "summary": "A topic containing the wind speed registered at work",
+        "description": "Wind readings published via the work IoT Api",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/windhome"
+        }
+      }
+    },
+    "weather.info": {
+      "subscribe": {
+        "summary": "A topic containing the weather info from the places I usually am at",
+        "description": "This topic is the result of combining the `weather.temperatures.*` and `weather.wind.*` topics. If data is not available, `null` will be returned for that key.",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/weather"
+        }
+      }
+    },
+    "weather.invalid.string": {
+      "subscribe": {
+        "summary": "A topic with an invalid schema",
+        "description": "This topic is the result of providing a string as the schema payload.",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "$ref": "#/components/messages/stringPayload"
+        }
+      }
+    },
+    "weather.no.schema": {
+      "subscribe": {
+        "summary": "A topic with an no schema"
+      }
+    },
+    "weather.no.desc": {
+      "subscribe": {}
+    },
+    "weather.no.desc.publish": {
+      "publish": {}
+    },
+    "weather.publish": {
+      "description": "A channel that is all about listening for weather readings",
+      "publish": {
+        "summary": "Listening for weather readings",
+        "description": "Listening for temperature and wind readings published via the work IoT Api ",
+        "bindings": {
+          "$ref": "#/components/operationBindings/kafkaClientBindings"
+        },
+        "message": {
+          "oneOf": [
+            {
+              "$ref": "#/components/messages/temperatures"
+            },
+            {
+              "$ref": "#/components/messages/temperaturesV2"
+            }
+          ]
+        }
+      }
+    },
+    "weather/measured": {
+      "publish": {
+        "summary": "Inform about environmental weather conditions.",
+        "operationId": "onWeatherMeasured",
+        "message": {
+          "name": "WeatherMeasured",
+          "payload": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Id of the weather temperature."
+              },
+              "celsius": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Weather intensity measured in celsius."
+              },
+              "sentAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Date and time when the message was sent."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "scramCredentials": {
+        "type": "userPassword",
+        "description": "Kafka SASL-SCRAM-256 Username Password, provided via client properties on connect to the cluster. Contact the owner for credentials."
+      },
+      "example_oauth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://example.com/api/oauth/dialog",
+            "scopes": {
+              "write:all": "modify items in your account",
+              "read:all": "read your items"
+            }
+          }
+        }
+      },
+      "example_openIdConnect": {
+        "type": "openIdConnect",
+        "description": "Example openIdConnect security",
+        "openIdConnectUrl": "https://example.com/api"
+      }
+    },
+    "operationBindings": {
+      "providedBindings": {
+        "kafka": {
+          "groupId": {
+            "type": "string",
+            "enum": ["prod_group"]
+          },
+          "clientId": {
+            "type": "string",
+            "enum": ["prod_client"]
+          },
+          "bindingVersion": "0.1.0"
+        }
+      },
+      "kafkaClientBindings": {
+        "kafka": {
+          "groupId": {
+            "type": "string",
+            "enum": ["prod", "dev"]
+          },
+          "clientId": {
+            "type": "string",
+            "enum": ["prod", "dev"]
+          },
+          "bindingVersion": "0.1.0"
+        }
+      }
+    },
+    "messageBindings": {
+      "weatherMessageBindings": {
+        "kafka": {
+          "key": {
+            "type": "string",
+            "description": "All records to have the following key to indicate it is a raw value",
+            "enum": ["weather.sensor"]
+          },
+          "bindingVersion": "0.1.0"
+        }
+      },
+      "weatherBindings": {
+        "kafka": {
+          "key": "integer",
+          "bindingVersion": "0.1.0"
+        }
+      },
+      "windSpeedMessageBindings": {
+        "kafka": {
+          "key": {
+            "type": "Object",
+            "description": "All records to have the following key to indicate the wind speed raw value",
+            "properties": {
+              "wind.measurer": {
+                "type": "integer",
+                "description": "A key for the wind speed measurer"
+              },
+              "wind.direction": {
+                "type": "string",
+                "description": "A key for the wind direction",
+                "enum": ["North", "East", "South", "West"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "messages": {
+      "stringPayload": {
+        "description": "A payload from a basic temperature sensor",
+        "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+        "payload": "{ \n  \"namespace\": \"Temperature.SensorTwo\",\n  \"type\": \"record\",\n  \"name\": \"TemperatureRecordings\",\n  \"fields\": [{\n    \"name\": \"Temperature\",\n    \"type\": \"double\"\n  }, {\n    \"name\": \"Pressure\",\n    \"type\": \"long\"\n  },\n  {\n    \"name\": \"Timestamp\",\n    \"type\": \"long\"\n  }\n  ]\n}\n"
+      },
+      "temperatures": {
+        "description": "A payload from a basic temperature sensor",
+        "summary": "A short summary of this sensor",
+        "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+        "headers": {
+          "type": "object",
+          "properties": {
+            "applicationInstanceId": {
+              "description": "Unique identifier for a given instance of the publishing application",
+              "type": "string"
+            }
+          }
+        },
+        "examples": [
+          {
+            "headers": {
+              "applicationInstanceId": "1"
+            }
+          }
+        ],
+        "payload": {
+          "type": "record",
+          "doc": "TemperatureRecordings",
+          "name": "BasicTemperatures",
+          "fields": [
+            {
+              "name": "Temperature",
+              "type": "double"
+            },
+            {
+              "name": "Timestamp",
+              "type": "long"
+            },
+            {
+              "name": "Id",
+              "type": "string"
+            }
+          ]
+        },
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherMessageBindings"
+        }
+      },
+      "temperaturesV2": {
+        "description": "A payload from a newer, more advanced temperature sensor",
+        "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+        "contentType": "application/json",
+        "name": "AdvancedTemperatures",
+        "examples": [
+          {
+            "payload": {
+              "Temperature": 12.0,
+              "Timestamp": 1234567
+            }
+          }
+        ],
+        "payload": {
+          "namespace": "Temperature.SensorTwo",
+          "type": "record",
+          "name": "TemperatureRecordings",
+          "fields": [
+            {
+              "name": "Temperature",
+              "type": "double"
+            },
+            {
+              "name": "Pressure",
+              "type": "long"
+            },
+            {
+              "name": "Timestamp",
+              "type": "long"
+            }
+          ]
+        },
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherMessageBindings"
+        }
+      },
+      "windhome": {
+        "description": "A payload from a newer, more advanced temperature sensor",
+        "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+        "name": "AdvancedTemperatures",
+        "examples": [
+          {
+            "payload": {
+              "speed": 8.0
+            }
+          }
+        ],
+        "payload": {},
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherMessageBindings"
+        }
+      },
+      "wind": {
+        "description": "A payload including wind direction and speed readings",
+        "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "wind": {
+              "type": "object",
+              "properties": {
+                "direction": {
+                  "type": "string",
+                  "description": "Wind direction",
+                  "enum": ["North", "East", "South", "West"]
+                },
+                "speed": {
+                  "description": "Wind speed (in m/s)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "bindings": {
+          "$ref": "#/components/messageBindings/windSpeedMessageBindings"
+        }
+      },
+      "wind-openapi": {
+        "description": "A payload including wind direction and speed readings",
+        "schemaFormat": "application/vnd.oai.openapi;version=3.0.0",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "wind": {
+              "type": "object",
+              "properties": {
+                "direction": {
+                  "type": "string",
+                  "description": "Wind direction",
+                  "enum": ["North", "East", "South", "West"]
+                },
+                "speed": {
+                  "description": "Wind speed (in m/s)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherMessageBindings"
+        }
+      },
+      "wind-json": {
+        "description": "A payload including wind direction and speed readings",
+        "schemaFormat": "application/schema+json;version=draft-07",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "wind": {
+              "type": "object",
+              "properties": {
+                "direction": {
+                  "type": "string",
+                  "description": "Wind direction",
+                  "enum": ["North", "East", "South", "West"]
+                },
+                "speed": {
+                  "description": "Wind speed (in m/s)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherMessageBindings"
+        }
+      },
+      "windspeed": {
+        "description": "A payload indicating wind speed",
+        "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
+        "payload": {
+          "type": "integer"
+        },
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherBindings"
+        }
+      },
+      "windspeed2": {
+        "description": "A payload indicating wind speed",
+        "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+        "payload": "integer",
+        "bindings": {
+          "$ref": "#/components/messageBindings/weatherMessageBindings"
+        }
+      },
+
+      "weather": {
+        "description": "A payload containing weather information from and about a range of sources. Wind speed in m/s",
+        "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string"
+            },
+            "temperature": {
+              "description": "In celsius",
+              "type": "integer",
+              "format": "int32"
+            },
+            "wind": {
+              "type": "object",
+              "properties": {
+                "direction": {
+                  "type": "string",
+                  "description": "Wind direction",
+                  "enum": ["North", "East", "South", "West"]
+                },
+                "speed": {
+                  "description": "Wind speed (in m/s)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "bindings": {
+          "kafka": {
+            "key": {
+              "type": "string",
+              "enum": ["weather"]
+            },
+            "bindingVersion": "0.1.0"
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "type": "asyncapi",
+    "enforced": true
+  },
+  "externalDocs": {
+    "description": "Kafka External Documentation",
+    "url": "https://kafka.apache.org/documentation"
+  }
+}
