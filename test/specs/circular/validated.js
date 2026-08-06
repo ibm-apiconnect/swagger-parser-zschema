@@ -68,7 +68,7 @@ const validatedAPI = (module.exports = {
         title: "pet",
       },
       thing: {
-        $ref: "#/definitions/thing",
+        $ref: "#/paths/~1thing/get/responses/200/schema",
       },
       person: {
         title: "person",
@@ -145,7 +145,7 @@ const validatedAPI = (module.exports = {
             200: {
               description: "Returns a thing",
               schema: {
-                $ref: "#/definitions/thing",
+                $ref: "#/paths/~1thing/get/responses/200/schema",
               },
             },
           },
@@ -182,7 +182,7 @@ const validatedAPI = (module.exports = {
         title: "pet",
       },
       thing: {
-        $ref: "#/definitions/thing",
+        $ref: "#/paths/~1thing/get/responses/200/schema",
       },
       person: {
         $ref: "definitions/person.yaml",
