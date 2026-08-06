@@ -103,6 +103,11 @@ describe("Invalid APIs (Swagger 2.0 schema validation)", () => {
       valid: false,
       file: "oneof.yaml",
     },
+    {
+      name: "empty license.url (uri format should allow empty strings)",
+      valid: true,
+      file: "empty-license-url.yaml",
+    },
   ];
 
   it('should pass validation if "options.validate.schema" is false', async () => {
